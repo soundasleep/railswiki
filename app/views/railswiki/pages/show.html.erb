@@ -15,7 +15,12 @@
 
 <p>
   <strong>Latest content:</strong>
-  <%= @page.content %>
+  <%= include_wiki @page.title %>
+</p>
+
+<p>
+  <strong>Edited by</strong>
+  <%= @page.author.name %>
 </p>
 
 <%= link_to 'Edit', edit_page_path(@page) %> |

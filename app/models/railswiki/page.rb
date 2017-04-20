@@ -8,6 +8,8 @@ module Railswiki
     before_validation :save_lowercase_title, on: [:create, :update]
     validate :lowercase_title_must_equal_title
 
+    delegate :author, to: :latest_version
+
     def content
       latest_version.present? ? latest_version.body : "(empty)"
     end

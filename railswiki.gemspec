@@ -17,8 +17,13 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 5.0.2"
+
+  # Login
   s.add_dependency "omniauth-google-oauth2"
   s.add_dependency "activerecord-session_store"
+
+  # Rendering
+  s.add_dependency "redcarpet"
 
   s.add_development_dependency "sqlite3"
 end

@@ -8,6 +8,8 @@ module Railswiki
     before_action :require_page_create_permission, only: [:new, :create]
     before_action :require_page_delete_permission, only: [:destroy]
 
+    helper ApplicationHelper
+
     # GET /pages
     def index
       @pages = Page.all
@@ -20,6 +22,7 @@ module Railswiki
     # GET /pages/new
     def new
       @page = Page.new
+      @page.title = params[:title] if params[:title]
     end
 
     # GET /pages/1/edit
@@ -42,7 +45,8 @@ module Railswiki
     def update
       if @page.update(page_params)
         update_content
-        redirect_to @page, notice: 'Page was successfully updated.'
+        redirect_to title_path(prettify_title(@page.title)), notice: 'Page was successfully updated.'
+        #redirect_to @page, notice: 'Page was successfully updated.'
       else
         render :edit
       end
@@ -57,11 +61,20 @@ module Railswiki
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_page
-        @page = Page.where(id: params[:id]).first ||
-            Page.where(title: params[:path]).first ||
-            Page.where(lowercase_title: params[:path].downcase).first
+        title = params[:id] || params[:path]
+        raise ActiveRecord::RecordNotFound, "Unknown page request" unless title
+
+        @page = Page.where(id: title).first ||
+            Page.where(title: title).first ||
+            Page.where(title: unprettify_title(title)).first ||
+            Page.where(lowercase_title: title.downcase).first ||
+            Page.where(lowercase_title: unprettify_title(title).downcase).first
 
         unless @page
+          if user_can?(:create_page)
+            return redirect_to new_page_path(title: title)
+          end
+
           raise ActiveRecord::RecordNotFound, "Could not find page #{params[:id]} in #{params[:path]}"
         end
       end

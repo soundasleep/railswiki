@@ -4,7 +4,7 @@ Railswiki::Engine.routes.draw do
 
   resources :pages
 
-  match '*path', to: 'pages#show', via: :get
+  match '*path', to: 'pages#show', via: :get, as: :title
 
   root to: "pages#index"
 end

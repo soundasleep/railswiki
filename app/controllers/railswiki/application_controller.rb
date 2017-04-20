@@ -4,7 +4,7 @@ module Railswiki
 
     protect_from_forgery with: :exception
 
-    helper_method :current_user, :user_can?
+    helper_method :current_user, :user_can?, :prettify_title, :unprettify_title
 
     private
 
@@ -45,6 +45,15 @@ module Railswiki
       unless user_can?(:delete_page)
         raise InvalidRoleError, "You must be logged in to access this section"
       end
+    end
+
+    # TODO probably want this in a separate module
+    def prettify_title(title)
+      title.gsub(/ /, "_")
+    end
+
+    def unprettify_title(title)
+      title.gsub(/_/, " ")
     end
   end
 end
