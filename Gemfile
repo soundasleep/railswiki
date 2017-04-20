@@ -12,3 +12,5 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+gem "activerecord-session_store"

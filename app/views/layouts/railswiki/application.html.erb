@@ -8,6 +8,16 @@
 </head>
 <body>
 
+<p>
+<% if current_user %>
+  <%= link_to "Sign out", signout_path %>
+  <%= current_user.name %>
+  <%= current_user.inspect %>
+<% else %>
+  <%= link_to "Sign in with Google", "/auth/google_login" %>
+<% end %>
+</p>
+
 <%= yield %>
 
 </body>
