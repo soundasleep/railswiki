@@ -7,7 +7,15 @@
 
 <p>
   <strong>Latest version:</strong>
-  <%= @page.latest_version %>
+  <%= @page.latest_version_id %>
+  (out of
+  <%= @page.histories.count %>
+  versions)
+</p>
+
+<p>
+  <strong>Latest content:</strong>
+  <%= @page.content %>
 </p>
 
 <%= link_to 'Edit', edit_page_path(@page) %> |

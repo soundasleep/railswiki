@@ -14,7 +14,7 @@
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td><%= page.title %></td>
+        <td><%= link_to page.title, root_path + page.title %></td>
         <td><%= page.latest_version %></td>
         <td><%= link_to 'Show', page %></td>
         <td><%= link_to 'Edit', edit_page_path(page) if user_can?(:edit_page) %></td>

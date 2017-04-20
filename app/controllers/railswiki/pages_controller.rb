@@ -31,6 +31,7 @@ module Railswiki
       @page = Page.new(page_params)
 
       if @page.save
+        update_content
         redirect_to @page, notice: 'Page was successfully created.'
       else
         render :new
@@ -40,6 +41,7 @@ module Railswiki
     # PATCH/PUT /pages/1
     def update
       if @page.update(page_params)
+        update_content
         redirect_to @page, notice: 'Page was successfully updated.'
       else
         render :edit
@@ -62,6 +64,15 @@ module Railswiki
         unless @page
           raise ActiveRecord::RecordNotFound, "Could not find page #{params[:id]} in #{params[:path]}"
         end
+      end
+
+      def update_content
+        # Create a new history
+        history = @page.histories.create!({
+          author: current_user,
+          body: params.require(:page)[:content]
+        })
+        @page.update_attributes! latest_version_id: history.id
       end
 
       # Only allow a trusted parameter "white list" through.

@@ -1,12 +1,20 @@
 module Railswiki
   class Page < ApplicationRecord
-    belongs_to :latest_version
+    has_many :histories, dependent: :destroy
 
     validates :title, presence: true, uniqueness: true
     validates :lowercase_title, presence: true, uniqueness: true
 
     before_validation :save_lowercase_title, on: [:create, :update]
     validate :lowercase_title_must_equal_title
+
+    def content
+      latest_version.present? ? latest_version.body : "(empty)"
+    end
+
+    def latest_version
+      histories.where(id: latest_version_id).first
+    end
 
     private
 
