@@ -57,6 +57,7 @@ Set your secrets in a `.env` file in root (using `dotenv-rails`):
 ```yaml
 OAUTH_CLIENT_ID: "xyz"
 OAUTH_CLIENT_SECRET: "xyz"
+# TODO is this actually necessary?
 APPLICATION_CONFIG_SECRET_TOKEN: "<A LONG SECRET>"
 ```
 
@@ -67,6 +68,13 @@ You can now host locally and visit http://localhost:3000/wiki:
 ```bash
 $ rails s
 ```
+
+## Extending
+
+In your local app, edit the app/assets/javascripts/ and app/assets/stylesheets as normal.
+They will automatically be picked up.
+
+You can also override individual views from _railswiki_ by creating e.g. `app/views/railswiki/pages/show.html.erb`.
 
 ## Contributing
 Contribution directions go here.

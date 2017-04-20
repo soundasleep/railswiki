@@ -55,7 +55,13 @@ module Railswiki
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_page
-        @page = Page.find(params[:id])
+        @page = Page.where(id: params[:id]).first ||
+            Page.where(title: params[:path]).first ||
+            Page.where(lowercase_title: params[:path].downcase).first
+
+        unless @page
+          raise ActiveRecord::RecordNotFound, "Could not find page #{params[:id]} in #{params[:path]}"
+        end
       end
 
       # Only allow a trusted parameter "white list" through.
