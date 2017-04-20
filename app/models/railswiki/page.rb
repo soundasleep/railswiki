@@ -18,6 +18,16 @@ module Railswiki
       histories.where(id: latest_version_id).first
     end
 
+    def expose_json
+      {
+        title: title,
+        created_at: created_at,
+        updated_at: updated_at,
+        author: author.expose_json,
+        content: content
+      }
+    end
+
     private
 
     def lowercase_title_must_equal_title

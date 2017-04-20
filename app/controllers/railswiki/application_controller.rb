@@ -4,7 +4,7 @@ module Railswiki
 
     protect_from_forgery with: :exception
 
-    helper_method :current_user, :user_can?, :prettify_title, :unprettify_title
+    helper_method :current_user, :user_can?, :prettify_title, :unprettify_title, :wiki_path
 
     private
 
@@ -54,6 +54,10 @@ module Railswiki
 
     def unprettify_title(title)
       title.gsub(/_/, " ")
+    end
+
+    def wiki_path(page, options = {})
+      title_path(prettify_title(page.title), options)
     end
   end
 end

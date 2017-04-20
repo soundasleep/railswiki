@@ -3,6 +3,7 @@
 <p>
   <strong>Title:</strong>
   <%= @page.title %>
+  <%= link_to "json", wiki_path(@page, format: :json) %>
 </p>
 
 <p>
@@ -23,5 +24,5 @@
   <%= @page.author.name %>
 </p>
 
-<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %> |
 <%= link_to 'Back', pages_path %>

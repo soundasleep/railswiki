@@ -17,6 +17,10 @@ module Railswiki
 
     # GET /pages/1
     def show
+      respond_to do |format|
+        format.html
+        format.json { render json: @page.expose_json }
+      end
     end
 
     # GET /pages/new
@@ -45,8 +49,7 @@ module Railswiki
     def update
       if @page.update(page_params)
         update_content
-        redirect_to title_path(prettify_title(@page.title)), notice: 'Page was successfully updated.'
-        #redirect_to @page, notice: 'Page was successfully updated.'
+        redirect_to wiki_path(@page), notice: 'Page was successfully updated.'
       else
         render :edit
       end
