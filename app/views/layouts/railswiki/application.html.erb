@@ -4,17 +4,21 @@
   <title>Railswiki</title>
   <%= stylesheet_link_tag    "railswiki/application", media: "all" %>
   <%= javascript_include_tag "railswiki/application" %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <p>
 <% if current_user %>
-  <%= link_to "Sign out", signout_path %>
+  <%= link_to "Sign out", logout_path %>
   <%= current_user.name %>
   <%= current_user.inspect %>
 <% else %>
-  <%= link_to "Sign in with Google", "/auth/google_login" %>
+  <%= link_to "Sign in with Google", main_app.login_path %>
 <% end %>
 </p>
 

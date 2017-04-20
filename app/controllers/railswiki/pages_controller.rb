@@ -3,6 +3,10 @@ require_dependency "railswiki/application_controller"
 module Railswiki
   class PagesController < ApplicationController
     before_action :set_page, only: [:show, :edit, :update, :destroy]
+    before_action :require_pages_list_permission, only: [:index]
+    before_action :require_page_edit_permission, only: [:edit, :update]
+    before_action :require_page_create_permission, only: [:new, :create]
+    before_action :require_page_delete_permission, only: [:destroy]
 
     # GET /pages
     def index
