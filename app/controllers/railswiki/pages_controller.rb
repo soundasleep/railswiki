@@ -79,11 +79,7 @@ module Railswiki
       title = params[:id] || params[:page_id] || params[:path]
       raise ActiveRecord::RecordNotFound, "Unknown page request" unless title
 
-      @page = Page.where(id: title).first ||
-          Page.where(title: title).first ||
-          Page.where(title: unprettify_title(title)).first ||
-          Page.where(lowercase_title: title.downcase).first ||
-          Page.where(lowercase_title: unprettify_title(title).downcase).first
+      @page = select_page(title)
 
       unless @page
         if user_can?(:create_page)

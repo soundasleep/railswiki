@@ -15,7 +15,7 @@ module Railswiki
     end
 
     def latest_version
-      histories.where(id: latest_version_id).first
+      @latest_version ||= histories.where(id: latest_version_id).first
     end
 
     def expose_json

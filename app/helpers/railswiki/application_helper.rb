@@ -7,14 +7,23 @@ module Railswiki
       if page_or_title.is_a?(Page)
         page = page_or_title
       else
-        page = Page.where(id: page_or_title).first ||
-          Page.where(title: page_or_title).first ||
-          Page.where(lowercase_title: page_or_title.downcase).first
+        page = select_page(page_or_title)
       end
 
       return raw "<!-- no page #{page_or_title} -->" unless page
 
       return raw markdown.render page.content
+    end
+
+    def select_page(page_or_title)
+      @select_pages ||= Hash.new do |hash, ref|
+        hash[ref] = Page.where(id: ref).
+          or(Page.where(title: [ref, unprettify_title(ref)]).
+          or(Page.where(lowercase_title: [ref.downcase, unprettify_title(ref.downcase)]))).
+          # joins("INNER JOIN railswiki_histories ON railswiki_pages.id=railswiki_histories.page_id AND railswiki_pages.latest_version_id=railswiki_histories.id").
+          first
+        end
+      @select_pages[page_or_title]
     end
 
     def markdown
