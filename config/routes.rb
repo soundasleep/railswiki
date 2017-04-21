@@ -7,7 +7,11 @@ Railswiki::Engine.routes.draw do
   end
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :histories, only: [:show, :index, :destroy]
-  resources :uploaded_files
+  resources :uploaded_files do
+    collection do
+      get :image_dialog
+    end
+  end
 
   match '*path', to: 'pages#show', via: :get, as: :title
 

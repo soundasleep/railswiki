@@ -1,0 +1,9 @@
+<h2>Insert image</h2>
+
+<ul class="uploaded-images">
+  <% @uploaded_files.select { |file| file.is_image? }.each do |uploaded_file| %>
+    <%= content_tag "li", {"data-url" => uploaded_file.file_url, "data-title" => uploaded_file.title} do %>
+      <%= image_tag uploaded_file.file_url %>
+    <% end %>
+  <% end %>
+</ul>

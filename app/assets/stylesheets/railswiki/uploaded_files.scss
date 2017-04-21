@@ -1,0 +1,25 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.insert-image {
+  .uploaded-images {
+    li {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      margin: 5px;
+      border: 1px solid #ccc;
+      &:hover {
+        border: 1px solid red;
+      }
+
+      img {
+        max-width: 98px;
+        max-height: 98px;
+      }
+    }
+  }
+}

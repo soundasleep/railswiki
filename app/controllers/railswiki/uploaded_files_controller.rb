@@ -14,6 +14,12 @@ module Railswiki
       @uploaded_files = UploadedFile.all
     end
 
+    # GET /uploaded_files/image_dialog
+    def image_dialog
+      index
+      render layout: false
+    end
+
     # GET /uploaded_files/1
     def show
     end

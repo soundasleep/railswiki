@@ -28,7 +28,7 @@ module Railswiki
 
     def markdown
       # @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new())
-      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new())
+      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new(), tables: true)
     end
 
     def time_ago(time)
