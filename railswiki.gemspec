@@ -25,5 +25,8 @@ Gem::Specification.new do |s|
   # Rendering
   s.add_dependency "redcarpet"
 
+  # Upload
+  s.add_dependency "carrierwave", "~> 1.0"
+
   s.add_development_dependency "sqlite3"
 end

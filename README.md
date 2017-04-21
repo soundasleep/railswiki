@@ -72,10 +72,14 @@ They will automatically be picked up.
 
 You can also override individual views from _railswiki_ by creating e.g. `app/views/railswiki/pages/show.html.erb`.
 
+## Supported
+
+1. Making pages, editing pages
+1. Assigning permissions to users
+
 ## MVP
 
 1. Create new users or invite users
-1. Assign permissions to users
 1. Image upload
 1. File upload
 1. Existing image widget in wysiwyg editor
@@ -83,6 +87,7 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 ## TODO
 
+1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests
 3. Travis-ci integration

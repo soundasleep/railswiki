@@ -26,6 +26,8 @@ module Railswiki
         current_user && ["admin", "editor"].include?(current_user.role)
       when :see_page_author
         current_user && ["admin", "editor"].include?(current_user.role)
+      when :edit_file, :delete_file, :create_file, :list_files
+        current_user && ["admin", "editor"].include?(current_user.role)
       else
         raise InvalidRoleError, "Unknown role #{role}"
       end
@@ -69,6 +71,22 @@ module Railswiki
 
     def require_history_delete_permission
       require_role :delete_history
+    end
+
+    def require_files_list_permission
+      require_role :list_files
+    end
+
+    def require_file_edit_permission
+      require_role :edit_file
+    end
+
+    def require_file_create_permission
+      require_role :create_file
+    end
+
+    def require_file_delete_permission
+      require_role :delete_file
     end
 
     def require_role(role)

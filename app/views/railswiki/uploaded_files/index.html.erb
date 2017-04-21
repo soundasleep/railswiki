@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Uploaded Files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Edited</th>
+      <th>By</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uploaded_files.each do |uploaded_file| %>
+      <tr>
+        <td>
+          <% if uploaded_file.is_image? %>
+            <%= link_to image_tag(uploaded_file.file_url), uploaded_file.file_url %>
+          <% else %>
+            <%= link_to uploaded_file.file_url, uploaded_file.file_identifier %>
+          <% end %>
+        </td>
+        <td>Edited <%= time_ago uploaded_file.created_at %></td>
+        <td>by <%= uploaded_file.user ? link_to(uploaded_file.user.name, uploaded_file.user) : "nobody!" %></td>
+        <td><%= link_to 'Edit', edit_uploaded_file_path(uploaded_file) if user_can?(:edit_file) %></td>
+        <td><%= link_to 'Destroy', uploaded_file, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_file) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Uploaded File', new_uploaded_file_path if user_can?(:create_file) %>

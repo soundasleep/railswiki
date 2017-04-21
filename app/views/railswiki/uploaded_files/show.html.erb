@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File:</strong>
+  <%= link_to @uploaded_file.file_identifier, @uploaded_file.file_url %>
+<p>
+
+<% if @uploaded_file.is_image? %>
+  <%= image_tag @uploaded_file.file_url %>
+<% else %>
+  <i>not an image</i>
+<% end %>
+
+<p>
+  <strong>Edited</strong>
+  <%= time_ago @uploaded_file.created_at %>
+  <strong>by</strong>
+  <% if @uploaded_file.user %>
+    <%= link_to @uploaded_file.user.name, @uploaded_file.user %>
+  <% else %>
+    <i>nobody!</i>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file) if user_can?(:edit_file) %>
+<%= link_to 'Back', uploaded_files_path %>
