@@ -8,7 +8,7 @@ module Railswiki
     before_validation :save_lowercase_title, on: [:create, :update]
     validate :lowercase_title_must_equal_title
 
-    delegate :author, to: :latest_version
+    delegate :author, to: :latest_version, allow_nil: true
 
     def content
       latest_version.present? ? latest_version.body : "(empty)"
@@ -20,10 +20,9 @@ module Railswiki
 
     def expose_json
       {
+        id: id,
         title: title,
-        created_at: created_at,
-        updated_at: updated_at,
-        author: author.expose_json,
+        updated_at: latest_version.created_at,
         content: content
       }
     end

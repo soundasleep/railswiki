@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= link_to @history.page.title, wiki_path(@history.page) %>
+  <small><%= link_to ".json", @history, format: :json %></small>
+as at <%= @history.created_at %></h1>
+
+<div class="wiki-content">
+  <%= raw markdown.render @history.body %>
+</div>
+
+<p>
+  <strong>Edited by</strong>
+  <%= link_to @history.author.name, @history.author %>
+</p>
+
+<%= link_to 'Back', histories_path %>

@@ -1,28 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @page.title %>
-  <%= link_to "json", wiki_path(@page, format: :json) %>
-</p>
+<h1><%= @page.title %><small><%= link_to ".json", wiki_path(@page, format: :json) %></small></h1>
 
-<p>
-  <strong>Latest version:</strong>
-  <%= @page.latest_version_id %>
-  (out of
-  <%= @page.histories.count %>
-  versions)
-</p>
-
-<p>
-  <strong>Latest content:</strong>
+<div class="wiki-content">
   <%= include_wiki @page.title %>
-</p>
+</div>
 
 <p>
-  <strong>Edited by</strong>
-  <%= @page.author.name %>
+  <strong>Edited</strong>
+  <% if @page.latest_version %>
+    <%= time_ago_in_words(@page.latest_version.created_at) %>
+  <% else %>
+    <i>never!</i>
+  <% end %>
+  ago
+  <% if user_can?(:see_page_author) %>
+    <strong>by</strong>
+    <% if @page.author %>
+      <%= link_to @page.author.name, @page.author %>
+    <% else %>
+      <i>nobody!</i>
+    <% end %>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %> |
+<%= link_to 'History', page_history_path(@page) if user_can?(:history_page) %>
+<%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %>
 <%= link_to 'Back', pages_path %>

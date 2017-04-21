@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.image_url, class: "avatar" %></td>
+        <td><%= link_to user.name, user %></td>
+        <td><%= mail_to user.email %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to "json", user, format: :json %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

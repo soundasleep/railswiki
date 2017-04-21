@@ -15,15 +15,7 @@
 </head>
 <body>
 
-<p>
-<% if current_user %>
-  <%= link_to "Sign out", logout_path %>
-  <%= current_user.name %>
-  <%= current_user.inspect %>
-<% else %>
-  <%= link_to "Sign in with Google", main_app.login_path %>
-<% end %>
-</p>
+<%= render "shared/menu" %>
 
 <%= yield %>
 

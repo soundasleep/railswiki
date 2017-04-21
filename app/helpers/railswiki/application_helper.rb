@@ -1,3 +1,5 @@
+require_dependency "redcarpet"
+
 module Railswiki
   module ApplicationHelper
     # TODO move this into a WikiHelper perhaps
@@ -16,8 +18,6 @@ module Railswiki
     end
 
     def markdown
-      require_dependency "redcarpet"
-
       # @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new())
       @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new())
     end

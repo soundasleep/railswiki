@@ -33,8 +33,8 @@ end
 Install and run migrations:
 
 ```bash
-$ rails railties:install:migrations
-$ rails db:migrate
+$ rake railties:install:migrations
+$ rake db:migrate
 ```
 
 Enable `config/secrets.yml` to load secrets from ENV (using `figaro`):
@@ -48,8 +48,6 @@ production:
   secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
   OAUTH_CLIENT_ID: <%= ENV["OAUTH_CLIENT_ID"] %>
   OAUTH_CLIENT_SECRET: <%= ENV["OAUTH_CLIENT_SECRET"] %>
-  # TODO is this actually necessary?
-  APPLICATION_CONFIG_SECRET_TOKEN: <%= ENV["APPLICATION_CONFIG_SECRET_TOKEN"] %>
 ```
 
 Set your secrets in a `.env` file in root (using `dotenv-rails`):
@@ -57,8 +55,6 @@ Set your secrets in a `.env` file in root (using `dotenv-rails`):
 ```yaml
 OAUTH_CLIENT_ID: "xyz"
 OAUTH_CLIENT_SECRET: "xyz"
-# TODO is this actually necessary?
-APPLICATION_CONFIG_SECRET_TOKEN: "<A LONG SECRET>"
 ```
 
 Get these values by [logging into your Google Developers Console](http://www.jevon.org/wiki/Google_OAuth2_with_Ruby_on_Rails).

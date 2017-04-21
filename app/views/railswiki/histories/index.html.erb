@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Latest version</th>
+      <% if user_can?(:see_page_author) %>
+      <th>Author</th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @histories.order(created_at: :desc).limit(100).each do |history| %>
+      <tr>
+        <td><%= link_to history.page.title, wiki_path(history.page) %></td>
+        <td><%= time_ago_in_words(history.created_at) %> ago</td>
+        <% if user_can?(:see_page_author) %>
+        <td><%= link_to history.author.name, history.author %></td>
+        <% end %>
+        <td><%= link_to "json", history_path(history, format: :json) %></td>
+        <td><%= link_to 'Destroy', history, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_history) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

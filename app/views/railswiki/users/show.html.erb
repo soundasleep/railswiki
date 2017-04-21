@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+  <%= link_to "json", @user, format: :json %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= mail_to @user.email %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @user.image_url %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @user.provider %>
+</p>
+
+<p>
+  <strong>Created at</strong>
+  <%= @user.created_at %>
+</p>
+
+<p>
+  <strong>Last login</strong>
+  <%= @user.last_login %>
+</p>
+
+<p>
+  <strong>Edits</strong>
+  <%= @user.histories.count %>
+</p>
+
+<h2>Recent edits</h2>
+
+<%= render "shared/histories", histories: @user.histories %>
+
+<%= link_to 'Back', users_path %>

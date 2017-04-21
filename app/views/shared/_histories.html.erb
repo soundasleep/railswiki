@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Time</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% histories.order(created_at: :desc).limit(20).each do |history| %>
+      <tr>
+        <td><%= link_to history.page.title, wiki_path(history.page) %></td>
+        <td><%= time_ago_in_words history.created_at %> ago</td>
+        <td><%= link_to 'Show', history %></td>
+        <td><%= link_to 'Destroy', history, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_history) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -9,6 +9,8 @@ module Railswiki
         :access_token => auth["credentials"]["token"],
         :expires => auth["credentials"]["expires_at"],
         :name => auth["info"]["name"],
+        :email => auth["info"]["email"],
+        :image_url => auth["info"]["image"],
       )
       url = session[:return_to] || root_path
       session[:return_to] = nil
