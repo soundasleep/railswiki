@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @uploaded_file.title || "Untitled file" %></h1>
+
 <p>
   <strong>File:</strong>
   <%= link_to @uploaded_file.file_identifier, @uploaded_file.file_url %>
@@ -10,6 +12,11 @@
 <% else %>
   <i>not an image</i>
 <% end %>
+
+<p>
+  <strong>Content type:</strong>
+  <%= @uploaded_file.content_type %>
+</p>
 
 <p>
   <strong>Edited</strong>

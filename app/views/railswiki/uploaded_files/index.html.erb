@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>File</th>
       <th>Edited</th>
       <th>By</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @uploaded_files.each do |uploaded_file| %>
       <tr>
+        <td><%= link_to uploaded_file.title, uploaded_file %></td>
         <td>
           <% if uploaded_file.is_image? %>
             <%= link_to image_tag(uploaded_file.file_url), uploaded_file.file_url %>

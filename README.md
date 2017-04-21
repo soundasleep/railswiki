@@ -76,12 +76,11 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 1. Making pages, editing pages
 1. Assigning permissions to users
+1. Uploading files and images
 
 ## MVP
 
 1. Create new users or invite users
-1. Image upload
-1. File upload
 1. Existing image widget in wysiwyg editor
 1. Existing file widget in wysiwyg editor
 

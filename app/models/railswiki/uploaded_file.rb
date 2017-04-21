@@ -7,7 +7,10 @@ module Railswiki
 
     belongs_to :user
 
+    validates :title, presence: true, uniqueness: true
     validate :file_exists
+
+    delegate :content_type, to: :file
 
     def file_url
       file.url.sub "public/", ""
