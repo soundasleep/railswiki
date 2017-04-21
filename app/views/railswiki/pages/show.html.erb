@@ -9,7 +9,7 @@
 <p>
   <strong>Edited</strong>
   <% if @page.latest_version %>
-    <%= time_ago_in_words(@page.latest_version.created_at) %>
+    <%= time_ago @page.latest_version.created_at %>
   <% else %>
     <i>never!</i>
   <% end %>

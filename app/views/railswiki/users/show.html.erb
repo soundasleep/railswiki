@@ -28,12 +28,12 @@
 
 <p>
   <strong>Created at</strong>
-  <%= @user.created_at %>
+  <%= time_ago @user.created_at %>
 </p>
 
 <p>
   <strong>Last login</strong>
-  <%= @user.last_login %>
+  <%= time_ago @user.last_login %>
 </p>
 
 <p>

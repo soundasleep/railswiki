@@ -18,6 +18,7 @@ module Railswiki
 
       if user.save
         session[:user_id] = user.id
+        user.update_attributes! last_login: Time.now
         notice = "Signed in!"
 
         if User.count == 1

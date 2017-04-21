@@ -15,11 +15,21 @@
 </head>
 <body>
 
-<%= render "shared/menu" %>
+<div class="header">
+  <%= include_wiki "Special:Header" %>
+</div>
 
-<%= yield %>
+<div class="menu">
+  <%= render "shared/menu" %>
+</div>
 
-<%= include_wiki "Special:Footer" %>
+<div class="content">
+  <%= yield %>
+</div>
+
+<div class="footer">
+  <%= include_wiki "Special:Footer" %>
+</div>
 
 </body>
 </html>

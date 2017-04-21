@@ -21,6 +21,10 @@ module Railswiki
       # @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new())
       @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new())
     end
+
+    def time_ago(time)
+      content_tag "span", "#{time_ago_in_words(time)} ago", title: "#{time}", class: "time_ago"
+    end
   end
 
   class MarkdownRenderer < Redcarpet::Render::HTML
