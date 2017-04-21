@@ -8,7 +8,8 @@
       <th>Image</th>
       <th>Name</th>
       <th>Email</th>
-      <th colspan="3"></th>
+      <th>Role</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -18,7 +19,9 @@
         <td><%= image_tag user.image_url, class: "avatar" %></td>
         <td><%= link_to user.name, user %></td>
         <td><%= mail_to user.email %></td>
+        <td><%= user.role %></td>
         <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) if user_can?(:edit_user) %></td>
         <td><%= link_to "json", user, format: :json %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_user) %></td>
       </tr>

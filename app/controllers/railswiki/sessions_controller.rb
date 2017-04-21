@@ -19,7 +19,12 @@ module Railswiki
       if user.save
         session[:user_id] = user.id
         notice = "Signed in!"
-        logger.debug "URL to redirect to: #{url}"
+
+        if User.count == 1
+          user.update_attributes! role: "admin"
+          notice += " You have been automatically assigned admin privileges."
+        end
+
         redirect_to url, :notice => notice
       else
         raise "Failed to login"

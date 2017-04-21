@@ -5,7 +5,7 @@ Railswiki::Engine.routes.draw do
   resources :pages do
     get :history
   end
-  resources :users, only: [:index, :show, :destroy]
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :histories, only: [:show, :index, :destroy]
 
   match '*path', to: 'pages#show', via: :get, as: :title

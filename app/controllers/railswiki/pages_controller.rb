@@ -2,14 +2,15 @@ require_dependency "railswiki/application_controller"
 
 module Railswiki
   class PagesController < ApplicationController
+    include PagesHelper
+    include ApplicationHelper
+
     before_action :set_page, only: [:show, :edit, :update, :destroy, :history]
     before_action :require_pages_list_permission, only: [:index]
     before_action :require_page_edit_permission, only: [:edit, :update]
     before_action :require_page_create_permission, only: [:new, :create]
     before_action :require_page_delete_permission, only: [:destroy]
     before_action :require_page_history_permission, only: [:history]
-
-    helper ApplicationHelper
 
     # GET /pages
     def index
@@ -87,9 +88,13 @@ module Railswiki
       unless @page
         if user_can?(:create_page)
           return redirect_to new_page_path(title: title)
+        else
+          if title == "Home"
+            @page = special_page("Welcome")
+          else
+            raise ActiveRecord::RecordNotFound, "Could not find page '#{title}'"
+          end
         end
-
-        raise ActiveRecord::RecordNotFound, "Could not find page '#{title}'"
       end
     end
 

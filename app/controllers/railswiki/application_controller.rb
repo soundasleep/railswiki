@@ -9,7 +9,7 @@ module Railswiki
     private
 
     def current_user
-      @current_user ||= Railswiki::User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= Railswiki::User.where(id: session[:user_id]).first if session[:user_id]
     end
 
     def user_can?(role)
@@ -17,15 +17,15 @@ module Railswiki
       when :list_pages
         true
       when :edit_page, :delete_page, :create_page, :list_pages, :history_page
-        current_user.present?
+        current_user && ["admin", "editor"].include?(current_user.role)
       when :list_users
-        current_user.present?
-      when :delete_user
-        false
+        current_user && ["admin", "editor"].include?(current_user.role)
+      when :edit_user, :delete_user
+        current_user && ["admin"].include?(current_user.role)
       when :list_histories, :delete_history
-        current_user.present?
+        current_user && ["admin", "editor"].include?(current_user.role)
       when :see_page_author
-        current_user.present?
+        current_user && ["admin", "editor"].include?(current_user.role)
       else
         raise InvalidRoleError, "Unknown role #{role}"
       end
@@ -53,6 +53,10 @@ module Railswiki
 
     def require_users_list_permission
       require_role :list_users
+    end
+
+    def require_user_edit_permission
+      require_role :edit_user
     end
 
     def require_user_delete_permission

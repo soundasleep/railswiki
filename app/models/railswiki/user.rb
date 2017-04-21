@@ -1,5 +1,7 @@
 module Railswiki
   class User < ApplicationRecord
+    AVAILABLE_ROLES = ["admin", "editor", ""]
+
     has_many :histories, dependent: :nullify, foreign_key: "author_id"
 
     validates :provider, presence: true

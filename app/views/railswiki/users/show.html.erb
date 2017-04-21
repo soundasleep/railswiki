@@ -7,6 +7,11 @@
 </p>
 
 <p>
+  <strong>Role:</strong>
+  <%= @user.role %>
+</p>
+
+<p>
   <strong>Email:</strong>
   <%= mail_to @user.email %>
 </p>
@@ -40,4 +45,5 @@
 
 <%= render "shared/histories", histories: @user.histories %>
 
+<%= link_to 'Edit', edit_user_path(@user) if user_can?(:edit_user) %>
 <%= link_to 'Back', users_path %>

@@ -7,7 +7,7 @@
   Logged in as
   <%= link_to current_user.name, current_user %>
   <%= link_to "Sign out", logout_path %>
-  <%= link_to "Users", users_path %>
+  <%= link_to "Users", users_path if user_can?(:list_users) %>
 <% else %>
   <%= link_to "Sign in with Google", main_app.login_path %>
 <% end %>

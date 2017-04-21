@@ -3,7 +3,7 @@
 <h1><%= @page.title %><small><%= link_to ".json", wiki_path(@page, format: :json) %></small></h1>
 
 <div class="wiki-content">
-  <%= include_wiki @page.title %>
+  <%= raw markdown.render @page.content %>
 </div>
 
 <p>

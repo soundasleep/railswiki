@@ -1,0 +1,40 @@
+<%= form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :role %>
+    <%= f.select :role, Railswiki::User::AVAILABLE_ROLES %>
+  </div>
+
+  <h2>Description of roles:</h2>
+
+  <ul>
+    <li><strong>admin</strong> users can edit and remove users</li>
+    <li><strong>editor</strong> users can edit pages and view page histories</li>
+    <li><strong>other</strong> users can view pages</li>
+  </ul>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
