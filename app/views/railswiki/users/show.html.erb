@@ -46,6 +46,11 @@
   <%= @user.histories.count %>
 </p>
 
+<p>
+  <strong>Files</strong>
+  <%= link_to @user.uploaded_files.count, uploaded_files_path %>
+</p>
+
 <h2>Recent edits</h2>
 
 <%= render "shared/histories", histories: @user.histories %>

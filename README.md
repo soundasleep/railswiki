@@ -92,6 +92,7 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 ## TODO
 
+1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
 1. Images can be scaled and linked to external URLs
 1. All the schemas require null set
 1. Rspec tests

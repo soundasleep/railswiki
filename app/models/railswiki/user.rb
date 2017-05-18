@@ -17,8 +17,6 @@ module Railswiki
     validates :email, presence: true, uniqueness: true, email: true
     validates :role, presence: true, inclusion: { in: AVAILABLE_ROLES }
 
-    # TODO validate role is in AVAILABLE_ROLES
-
     def expose_json
       {
         id: id,

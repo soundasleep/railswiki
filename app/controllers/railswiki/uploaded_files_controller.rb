@@ -28,10 +28,12 @@ module Railswiki
     def new
       @uploaded_file = UploadedFile.new
       @uploaded_file.user = current_user
+      @uploaded_file.title = "#{Time.now}"
     end
 
     # GET /uploaded_files/1/edit
     def edit
+      @uploaded_file.user = current_user
     end
 
     # POST /uploaded_files

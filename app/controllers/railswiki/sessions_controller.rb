@@ -19,20 +19,25 @@ module Railswiki
         session[:return_to] = nil
         url = root_path if url.eql?('/logout')
 
-        if user.new_record? && User.count >= 1
-          # this user must have been invited
-          invite = find_invite(user)
-          if invite
-            user.role = invite.role
-            user.save!
-            invite.update_attributes!({
-              invited_user: user,
-              accepted_at: Time.now,
-            })
-
-            notice << "Invite accepted as a #{invite.role || "user"}."
+        if user.new_record?
+          if User.count == 0
+            user.role = User::ROLE_ADMIN
+            notice << "As the first user, you have been automatically assigned admin privileges."
           else
-            raise "You need to be invited in order to login"
+            # this user must have been invited
+            invite = find_invite(user)
+            if invite
+              user.role = invite.role
+              user.save!
+              invite.update_attributes!({
+                invited_user: user,
+                accepted_at: Time.now,
+              })
+
+              notice << "Invite accepted as a #{invite.role || "user"}."
+            else
+              raise "You need to be invited in order to login"
+            end
           end
         end
 
@@ -40,11 +45,6 @@ module Railswiki
           session[:user_id] = user.id
           user.update_attributes! last_login: Time.now
           notice << "Signed in!"
-
-          if User.count == 1
-            user.update_attributes! role: User::ROLE_ADMIN
-            notice << "You have been automatically assigned admin privileges."
-          end
 
           redirect_to url, :notice => notice.join("\n")
         else

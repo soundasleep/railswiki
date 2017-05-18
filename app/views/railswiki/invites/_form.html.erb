@@ -14,11 +14,20 @@
   <div class="field">
     <%= f.label :email %>
     <%= f.text_field :email %>
+
+    <small class="tip">
+      Invited users need to sign in using the same Google Account
+      registered to this e-mail address.
+    </small>
   </div>
 
   <div class="field">
     <%= f.label :inviting_user %>
     <%= user_link invite.inviting_user %>
+
+    <small class="tip">
+      That's you!
+    </small>
   </div>
 
   <%= render("shared/roles", form: f) %>
