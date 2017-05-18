@@ -52,6 +52,7 @@ module Railswiki
 
   class MarkdownRenderer < Redcarpet::Render::HTML
     def preprocess(full_document)
+      # Wiki links
       full_document.gsub(/\[\[([^\]]+)\]\]/i, "[\\1](\\1)")
     end
 

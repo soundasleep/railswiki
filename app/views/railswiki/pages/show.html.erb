@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @page.title %><small><%= link_to ".json", wiki_path(@page, format: :json) %></small></h1>
+<h1><%= @page.title %>
+  <small>
+    <%= link_to 'History', page_history_path(@page) if user_can?(:history_page) %>
+    <%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %>
+    <%= link_to ".json", wiki_path(@page, format: :json) %>
+  </small>
+</h1>
 
 <div class="wiki-content">
   <%= raw markdown.render @page.content %>

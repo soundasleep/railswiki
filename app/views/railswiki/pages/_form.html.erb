@@ -22,51 +22,87 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit data: { disable_with: false } %>
   </div>
 <% end %>
 
 <script type="text/javascript">
+  var select_image = {
+    name: "select-image",
+    action: function create_select_image_popup(editor) {
+      var refresh_links = function refresh_links() {
+        $(".insert-image li").on('click', function(e) {
+          pos = simplemde.codemirror.getCursor();
+          simplemde.codemirror.setSelection(pos, pos);
+          var text = "![" + $(e.target).parent("li").attr("data-title") + "](" + $(e.target).parent("li").attr("data-url") + ")";
+          simplemde.codemirror.replaceSelection(text);
+          modal.close();
+        });
+      };
+
+      var request_content = function request_content() {
+        $.ajax({
+          url: "<%= j image_dialog_uploaded_files_path %>",
+          success: function success(data, textStatus, jqXHR) {
+            modal.setContent(data);
+            refresh_links();
+          }
+        });
+      };
+
+      var modal = new tingle.modal({
+        cssClass: ['insert-image'],
+        onOpen: function() {
+          request_content();
+        }
+      });
+      modal.setContent("<span class=\"loading\">loading...</span>");
+      modal.open();
+    },
+    className: "fa fa-picture-o",
+    title: "Insert Image"
+  };
+
+  var targetElement = document.getElementById("page_content");
+
   var simplemde = new SimpleMDE({
-    element: document.getElementById("page_content"),
+    element: targetElement,
     toolbar: ["bold", "italic", "strikethrough", "heading", "|",
         "code", "quote", "table", "horizontal-rule", "|",
-        "link", "image", "unordered-list", "ordered-list", "|",
-        "preview", "side-by-side", "fullscreen", {
-        name: "select-image",
-        action: function create_select_image_popup(editor) {
-          var refresh_links = function refresh_links() {
-            $(".insert-image li").on('click', function(e) {
-              pos = simplemde.codemirror.getCursor();
-              simplemde.codemirror.setSelection(pos, pos);
-              var text = "![" + $(e.target).parent("li").attr("data-title") + "](" + $(e.target).parent("li").attr("data-url") + ")";
-              simplemde.codemirror.replaceSelection(text);
-              modal.close();
-            });
-          };
+        "link", select_image, "unordered-list", "ordered-list", "|",
+        "preview", "side-by-side", "fullscreen"],
 
-          var request_content = function request_content() {
-            $.ajax({
-              url: "<%= j image_dialog_uploaded_files_path %>",
-              success: function success(data, textStatus, jqXHR) {
-                modal.setContent(data);
-                refresh_links();
-              }
-            });
-          };
+    // a JS alert window appears asking for the link or image URL
+    promptURLs: true,
 
-          var modal = new tingle.modal({
-            cssClass: ['insert-image'],
-            onOpen: function() {
-              request_content();
-            }
-          });
-          modal.setContent("<span class=\"loading\">loading...</span>");
-          modal.open();
-        },
-        className: "fa fa-star",
-        title: "Custom Button",
-    }]
+    // force the textarea to stay up to date
+    forceSync: true,
+  });
+
+  simplemde.originalContent = $(targetElement).val();
+
+  var thereAreUnsavedChanges = function() {
+    return !window.confirmedNavigatingAway && $(targetElement).val() != simplemde.originalContent;
+  }
+
+  $(window).bind("beforeunload", function(event) {
+    if (thereAreUnsavedChanges()) {
+      event.returnValue = "You have unsaved changes that may be lost.";
+      return event.returnValue;
+    }
+  });
+
+  $("input[type=submit]").on("click", function() {
+    // if we're clicking Submit, we always want to navigate away
+    window.confirmedNavigatingAway = true;
+  });
+
+  // Turbolinks 4 & 5
+  $(document).on("page:before-change turbolinks:before-visit", function() {
+    if (thereAreUnsavedChanges()) {
+      window.confirmedNavigatingAway = confirm("You have unsaved changes that may be lost.");
+      return window.confirmedNavigatingAway;
+    }
   });
 </script>
 

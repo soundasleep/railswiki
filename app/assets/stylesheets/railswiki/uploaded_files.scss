@@ -4,13 +4,20 @@
 */
 
 .insert-image {
-  .uploaded-images {
+  ul.uploaded-images {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
     li {
       display: inline-block;
       width: 100px;
       height: 100px;
       cursor: pointer;
-      margin: 5px;
+      margin: 0 5px;
+      padding: 0;
+      vertical-align: top;
+
       border: 1px solid #ccc;
       &:hover {
         border: 1px solid red;

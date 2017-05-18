@@ -7,3 +7,5 @@
     <% end %>
   <% end %>
 </ul>
+
+<%= link_to 'New Uploaded File', new_uploaded_file_path if user_can?(:create_file) %>

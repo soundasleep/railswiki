@@ -77,18 +77,19 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Making pages, editing pages
 1. Assigning permissions to users
 1. Uploading files and images, images can be scaled and linked to external URLs
-1. Existing image widget in wysiwyg editor
+1. Existing image dialog in wysiwyg editor (uploading images remotely is too hard)
 1. Invite users
+1. Prevent navigating/reloading with unsaved changes
 
 ## MVP
 
 1. Existing file widget in wysiwyg editor
-1. Allow images to be uploaded from image dialog
 1. Search
 1. A nice default style
 1. Files can be deleted
 1. Pages can be deleted
 1. Histories can be deleted
+1. When login fails, redirect to an error page, not 500
 
 ## TODO
 
@@ -103,6 +104,8 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
 1. Support [strikethrough, pretty code blocks, etc](https://github.com/vmg/redcarpet)
 1. Example Special:Formatting page with full supported syntax
+1. What Links Here
+1. Page Categories
 
 ## Contributing
 Contribution directions go here.
