@@ -52,10 +52,14 @@ module Railswiki
       page = "." if page == ""
 
       if page.respond_to?(:title)
-        title_path(prettify_title(page.title), options)
+        url_helpers.title_path(prettify_title(page.title), options)
       else
-        title_path(prettify_title(page), options)
+        url_helpers.title_path(prettify_title(page), options)
       end
+    end
+
+    def url_helpers
+      Railswiki::Engine.routes.url_helpers
     end
 
     def markdown
@@ -97,7 +101,9 @@ module Railswiki
       end
 
       # Wiki links [[link]]
-      full_document = full_document.gsub(/\[\[([^\]]+)\]\]/i, "[\\1](\\1)")
+      full_document = full_document.gsub(/\[\[([^\]]+)\]\]/i) do |match|
+        "[#{$1}](#{wiki_path($1)})"
+      end
 
       full_document
     end
