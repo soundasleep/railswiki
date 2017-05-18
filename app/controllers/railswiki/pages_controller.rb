@@ -14,7 +14,17 @@ module Railswiki
 
     # GET /pages
     def index
-      @pages = Page.all
+      @special_pages = []
+      @pages = Page.search(params[:search])
+      if params[:search]
+        # if we're searching, and there's only one link, redirect to the first result
+        if @pages.count == 1
+          redirect_to wiki_path(@pages.first)
+        end
+      else
+        # if we're not searching, display all the Special pages too
+        @special_pages = special_pages.reject { |page| @pages.map(&:title).include?(page.title) }
+      end
     end
 
     # GET /pages/1
@@ -38,6 +48,12 @@ module Railswiki
     def new
       @page = Page.new
       @page.title = params[:title] if params[:title]
+
+      # Preload Special: pages with their default content
+      special_page = special_pages.select { |page| page.title == @page.title }.first
+      if special_page
+        @page.default_content = special_page.content
+      end
     end
 
     # GET /pages/1/edit
@@ -47,22 +63,25 @@ module Railswiki
     # POST /pages
     def create
       @page = Page.new(page_params)
-
-      if @page.save
-        update_content
-        redirect_to wiki_path(@page), notice: 'Page was successfully created.'
-      else
-        render :new
+      @page.transaction do
+        if @page.save
+          update_content
+          redirect_to wiki_path(@page), notice: 'Page was successfully created.'
+        else
+          render :new
+        end
       end
     end
 
     # PATCH/PUT /pages/1
     def update
-      if @page.update(page_params)
-        update_content
-        redirect_to wiki_path(@page), notice: 'Page was successfully updated.'
-      else
-        render :edit
+      @page.transaction do
+        if @page.update(page_params)
+          update_content
+          redirect_to wiki_path(@page), notice: 'Page was successfully updated.'
+        else
+          render :edit
+        end
       end
     end
 

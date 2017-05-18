@@ -27,8 +27,38 @@
         <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_page) %></td>
       </tr>
     <% end %>
+
+    <% if @pages.empty? %>
+      <tr>
+        <td colspan="6">
+          <i>no pages found!</i>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
+
+<% unless @special_pages.empty? %>
+  <h2>Special Pages</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @special_pages.each do |page| %>
+        <tr>
+          <td><%= link_to page.title, wiki_path(page) %></td>
+          <td><%= link_to 'Edit', new_page_path(title: page.title) if user_can?(:create_page) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <br>
 

@@ -1,5 +1,4 @@
 <p>
-<%= link_to "Home", wiki_path("") %>
 <%= link_to "New page", new_page_path if user_can?(:create_page) %>
 <%= link_to "Pages", pages_path if user_can?(:list_pages) %>
 <%= link_to "Histories", histories_path if user_can?(:list_histories) %>

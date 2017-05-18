@@ -2,7 +2,7 @@
 
 <h1>
   <%= link_to @history.page.title, wiki_path(@history.page) %>
-  <small><%= link_to ".json", @history, format: :json %></small>
+  <small><%= link_to ".json", history_path(@history, format: :json) %></small>
 as at <%= time_ago @history.created_at %></h1>
 
 <div class="wiki-content">

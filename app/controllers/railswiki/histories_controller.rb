@@ -22,15 +22,20 @@ module Railswiki
 
     # DELETE /histories/1
     def destroy
-      @history.destroy
-      @history.page.reload
+      @history.transaction do
+        @history.destroy!
+        @history.page.reload
 
-      latest_version = @history.page.histories.order(created_at: :desc).first
-      @history.page.update_attributes!({
-        latest_version_id: latest_version.present? ? latest_version.id : nil,
-      })
+        latest_version = @history.page.histories.order(created_at: :desc).first
+        if latest_version.present?
+          @history.page.update_attributes!(latest_version_id: latest_version.id)
+        else
+          # We can't have a page with no history
+          @history.page.destroy!
+        end
 
-      redirect_to @history.page, notice: 'History was successfully destroyed.'
+        redirect_to @history.page, notice: 'History was successfully destroyed.'
+      end
     end
 
     private

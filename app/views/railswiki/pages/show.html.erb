@@ -2,15 +2,19 @@
 
 <h1><%= @page.title %>
   <small>
-    <%= link_to 'History', page_history_path(@page) if user_can?(:history_page) %>
-    <%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %>
-    <%= link_to ".json", wiki_path(@page, format: :json) %>
+    <% if @page.builtin_page? %>
+      <%= link_to 'Edit', new_page_path(title: @page.title) if user_can?(:create_page) %>
+    <% else %>
+      <%= link_to 'History', page_history_path(@page) if user_can?(:history_page) %>
+      <%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %>
+      <%= link_to ".json", wiki_path(@page, format: :json) %>
+    <% end %>
   </small>
 </h1>
 
-<div class="wiki-content">
+<%= content_tag "div", class: "wiki-content wiki-#{classify_title(@page.title)}" do %>
   <%= raw markdown.render @page.content %>
-</div>
+<% end %>
 
 <p>
   <strong>Edited</strong>
@@ -28,7 +32,3 @@
     <% end %>
   <% end %>
 </p>
-
-<%= link_to 'History', page_history_path(@page) if user_can?(:history_page) %>
-<%= link_to 'Edit', edit_page_path(@page) if user_can?(:edit_page) %>
-<%= link_to 'Back', pages_path %>

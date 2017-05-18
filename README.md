@@ -81,10 +81,11 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Existing file dialog in wysiwyg editor
 1. Invite users
 1. Prevent navigating/reloading with unsaved changes
+1. Templates can be included using `{{template}}``
+1. Search with `{{Special:Search}}` template
 
 ## MVP
 
-1. Search
 1. A nice default style
 1. Files can be deleted
 1. Pages can be deleted

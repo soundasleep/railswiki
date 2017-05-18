@@ -1,5 +1,7 @@
 module Railswiki
   class ApplicationController < ActionController::Base
+    include ApplicationHelper
+
     class InvalidRoleError < StandardError; end
 
     protect_from_forgery with: :exception
@@ -108,25 +110,6 @@ module Railswiki
     def require_role(role)
       unless user_can?(role)
         raise InvalidRoleError, "You must be logged in to access this section"
-      end
-    end
-
-    # TODO probably want this in a separate module
-    def prettify_title(title)
-      title.gsub(/ /, "_")
-    end
-
-    def unprettify_title(title)
-      title.gsub(/_/, " ")
-    end
-
-    def wiki_path(page, options = {})
-      page = "." if page == ""
-
-      if page.respond_to?(:title)
-        title_path(prettify_title(page.title), options)
-      else
-        title_path(prettify_title(page), options)
       end
     end
   end

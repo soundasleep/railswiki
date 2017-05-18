@@ -2,3 +2,44 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+.wiki-template {
+  &.wiki-Special_Search {
+    display: inline;
+
+    &, form, div, p, label {
+      display: inline-block;
+      border: 0;
+      padding: 0;
+      clear: none;
+    }
+    p {
+      display: inline;
+      margin: 0;
+    }
+    h3, label, input[type=submit] {
+      display: none;
+    }
+  }
+}
+
+.wiki-Special_Header {
+  float: left;
+  max-width: 50%;
+}
+
+.menu {
+  float: right;
+  max-width: 50%;
+  text-align: right;
+  margin-bottom: 20px;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.content {
+  clear: both;
+}
