@@ -17,7 +17,8 @@ module Railswiki
     end
 
     def is_image?
-      file.content_type && MIME::Types[file.content_type].first.media_type == "image"
+      file.content_type && MIME::Types[file.content_type].any? &&
+          MIME::Types[file.content_type].first.media_type == "image"
     end
 
     private

@@ -14,7 +14,8 @@ Railswiki::Engine.routes.draw do
     end
   end
 
-  match '*path', to: 'pages#show', via: :get, as: :title
+  get "/download/:title", to: "uploaded_files#download", as: "download_file", format: false, constraints: { title: /.*/ }
+  get "*path", to: 'pages#show', via: :get, as: :title
 
   root to: "pages#show", id: "Home"
 end

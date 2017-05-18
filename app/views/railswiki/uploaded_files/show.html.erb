@@ -7,11 +7,7 @@
   <%= link_to @uploaded_file.file_identifier, @uploaded_file.file_url %>
 <p>
 
-<% if @uploaded_file.is_image? %>
-  <%= image_tag @uploaded_file.file_url %>
-<% else %>
-  <i>not an image</i>
-<% end %>
+<%= render "inline", uploaded_file: @uploaded_file %>
 
 <p>
   <strong>Content type:</strong>

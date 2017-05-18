@@ -18,11 +18,7 @@
       <tr>
         <td><%= link_to uploaded_file.title, uploaded_file %></td>
         <td>
-          <% if uploaded_file.is_image? %>
-            <%= link_to image_tag(uploaded_file.file_url), uploaded_file.file_url %>
-          <% else %>
-            <%= link_to uploaded_file.file_url, uploaded_file.file_identifier %>
-          <% end %>
+          <%= render "inline", uploaded_file: uploaded_file %>
         </td>
         <td>Edited <%= time_ago uploaded_file.created_at %></td>
         <td>by <%= user_link uploaded_file.user %></td>

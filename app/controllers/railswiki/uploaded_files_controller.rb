@@ -24,6 +24,15 @@ module Railswiki
     def show
     end
 
+    # GET /uploaded_files/1/download
+    def download
+      @uploaded_file = UploadedFile.where(title: params[:title]).first
+      unless @uploaded_file
+        raise ActiveRecord::RecordNotFound, "Could not find file '#{params[:title]}'"
+      end
+      redirect_to @uploaded_file.file_url
+    end
+
     # GET /uploaded_files/new
     def new
       @uploaded_file = UploadedFile.new
@@ -42,6 +51,9 @@ module Railswiki
       @uploaded_file.user = current_user
 
       if @uploaded_file.save
+        # try update the title to the uploaded filename, this might fail if there's an existing file
+        @uploaded_file.update_attributes title: @uploaded_file.file_identifier
+
         redirect_to @uploaded_file, notice: 'Uploaded file was successfully created.'
       else
         render :new
@@ -52,6 +64,9 @@ module Railswiki
     def update
       @uploaded_file.user = current_user
       if @uploaded_file.update(uploaded_file_params)
+        # try update the title to the uploaded filename, this might fail if there's an existing file
+        @uploaded_file.update_attributes title: @uploaded_file.file_identifier
+
         redirect_to @uploaded_file, notice: 'Uploaded file was successfully updated.'
       else
         render :edit
