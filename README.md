@@ -76,7 +76,7 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 1. Making pages, editing pages
 1. Assigning permissions to users
-1. Uploading files and images
+1. Uploading files and images, images can be scaled and linked to external URLs
 1. Existing image widget in wysiwyg editor
 1. Invite users
 
@@ -92,8 +92,6 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 ## TODO
 
-1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
-1. Images can be scaled and linked to external URLs
 1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests
@@ -102,6 +100,9 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 5. Screenshot
 7. Include Javascript libraries through an asset pipeline, rather than through http
 8. Put dialog Javascript into assets/, not inline
+1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
+1. Support [strikethrough, pretty code blocks, etc](https://github.com/vmg/redcarpet)
+1. Example Special:Formatting page with full supported syntax
 
 ## Contributing
 Contribution directions go here.
