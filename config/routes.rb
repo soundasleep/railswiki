@@ -11,6 +11,7 @@ Railswiki::Engine.routes.draw do
   resources :uploaded_files do
     collection do
       get :image_dialog
+      get :file_dialog
     end
   end
 

@@ -30,3 +30,18 @@
     }
   }
 }
+
+.insert-file {
+  ul.uploaded-files {
+    margin: 5px;
+    margin-bottom: 15px;
+
+    li {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

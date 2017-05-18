@@ -31,7 +31,7 @@
     name: "select-image",
     action: function create_select_image_popup(editor) {
       var refresh_links = function refresh_links() {
-        $(".insert-image li").on('click', function(e) {
+        $(".insert-image li img").on('click', function(e) {
           pos = simplemde.codemirror.getCursor();
           simplemde.codemirror.setSelection(pos, pos);
           var text = "![" + $(e.target).parent("li").attr("data-title") + "](" + $(e.target).parent("li").attr("data-url") + ")";
@@ -63,13 +63,49 @@
     title: "Insert Image"
   };
 
+  var select_file = {
+    name: "select-file",
+    action: function create_select_file_popup(editor) {
+      var refresh_links = function refresh_links() {
+        $(".insert-file li span").on('click', function(e) {
+          pos = simplemde.codemirror.getCursor();
+          simplemde.codemirror.setSelection(pos, pos);
+          var text = "[" + $(e.target).parent("li").attr("data-title") + "](" + $(e.target).parent("li").attr("data-url") + ")";
+          simplemde.codemirror.replaceSelection(text);
+          modal.close();
+        });
+      };
+
+      var request_content = function request_content() {
+        $.ajax({
+          url: "<%= j file_dialog_uploaded_files_path %>",
+          success: function success(data, textStatus, jqXHR) {
+            modal.setContent(data);
+            refresh_links();
+          }
+        });
+      };
+
+      var modal = new tingle.modal({
+        cssClass: ['insert-file'],
+        onOpen: function() {
+          request_content();
+        }
+      });
+      modal.setContent("<span class=\"loading\">loading...</span>");
+      modal.open();
+    },
+    className: "fa fa-file-o",
+    title: "Insert File"
+  };
+
   var targetElement = document.getElementById("page_content");
 
   var simplemde = new SimpleMDE({
     element: targetElement,
     toolbar: ["bold", "italic", "strikethrough", "heading", "|",
         "code", "quote", "table", "horizontal-rule", "|",
-        "link", select_image, "unordered-list", "ordered-list", "|",
+        "link", select_image, select_file, "unordered-list", "ordered-list", "|",
         "preview", "side-by-side", "fullscreen"],
 
     // a JS alert window appears asking for the link or image URL

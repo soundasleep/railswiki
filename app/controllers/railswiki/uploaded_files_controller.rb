@@ -16,7 +16,13 @@ module Railswiki
 
     # GET /uploaded_files/image_dialog
     def image_dialog
-      index
+      @uploaded_files = UploadedFile.all.select { |file| file.is_image? }
+      render layout: false
+    end
+
+    # GET /uploaded_files/file_dialog
+    def file_dialog
+      @uploaded_files = UploadedFile.all.reject { |file| file.is_image? }
       render layout: false
     end
 

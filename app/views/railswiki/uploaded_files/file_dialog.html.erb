@@ -1,11 +1,11 @@
-<h2>Insert image</h2>
+<h2>Insert file</h2>
 
-<ul class="uploaded-images">
+<ul class="uploaded-files">
   <% @uploaded_files.each do |uploaded_file| %>
     <%= content_tag "li", data: {url: download_file_path(title: uploaded_file.title), title: uploaded_file.title} do %>
-      <%= image_tag uploaded_file.file_url %>
+      <span><%= uploaded_file.title %></span>
     <% end %>
   <% end %>
 </ul>
 
-<%= link_to 'Upload new image', new_uploaded_file_path if user_can?(:create_file) %>
+<%= link_to 'Upload new file', new_uploaded_file_path if user_can?(:create_file) %>

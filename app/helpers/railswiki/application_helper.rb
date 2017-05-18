@@ -20,15 +20,20 @@ module Railswiki
         hash[ref] = Page.where(id: ref).
           or(Page.where(title: [ref, unprettify_title(ref)]).
           or(Page.where(lowercase_title: [ref.downcase, unprettify_title(ref.downcase)]))).
-          # joins("INNER JOIN railswiki_histories ON railswiki_pages.id=railswiki_histories.page_id AND railswiki_pages.latest_version_id=railswiki_histories.id").
           first
         end
       @select_pages[page_or_title]
     end
 
     def markdown
-      # @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new())
-      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new(), tables: true)
+      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new(), markdown_options)
+    end
+
+    def markdown_options
+      {
+        tables: true,
+        no_intra_emphasis: true
+      }
     end
 
     def time_ago(time)

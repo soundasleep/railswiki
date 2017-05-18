@@ -78,12 +78,12 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Assigning permissions to users
 1. Uploading files and images, images can be scaled and linked to external URLs
 1. Existing image dialog in wysiwyg editor (uploading images remotely is too hard)
+1. Existing file dialog in wysiwyg editor
 1. Invite users
 1. Prevent navigating/reloading with unsaved changes
 
 ## MVP
 
-1. Existing file widget in wysiwyg editor
 1. Search
 1. A nice default style
 1. Files can be deleted
