@@ -87,9 +87,6 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 ## MVP
 
 1. A nice default style
-1. Files can be deleted
-1. Pages can be deleted
-1. Histories can be deleted
 1. When login fails, redirect to an error page, not 500
 
 ## TODO
