@@ -21,6 +21,11 @@
     <%= f.file_field :file %>
   </div>
 
+  <div class="field">
+    <%= f.label :user %>
+    <%= user_link uploaded_file.user %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

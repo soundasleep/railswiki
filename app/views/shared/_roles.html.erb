@@ -1,0 +1,12 @@
+<div class="field">
+  <%= form.label :role %>
+  <%= form.select :role, Railswiki::User::AVAILABLE_ROLES %>
+</div>
+
+<h2>Description of roles:</h2>
+
+<ul>
+  <li><strong><%= Railswiki::User::ROLE_ADMIN %></strong> users can edit, invite and remove users</li>
+  <li><strong><%= Railswiki::User::ROLE_EDITOR %></strong> users can edit pages and view page histories</li>
+  <li><strong><%= Railswiki::User::ROLE_DEFAULT %></strong> users can view pages</li>
+</ul>

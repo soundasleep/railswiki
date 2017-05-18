@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Invites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Invited By</th>
+      <th>Invited User</th>
+      <th>Invited At</th>
+      <th>Accepted At</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invites.each do |invite| %>
+      <tr>
+        <td><%= link_to invite.email, invite %></td>
+        <td><%= user_link invite.inviting_user %></td>
+        <td><%= user_link invite.invited_user %></td>
+        <td><%= time_ago invite.created_at %></td>
+        <td><%= time_ago invite.accepted_at %></td>
+        <td><%= link_to 'Show', invite %></td>
+        <td><%= link_to 'Destroy', invite, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_invite) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "Invited users", invites_path if user_can?(:list_invites) %>
+<%= link_to "Invite new user", new_invite_path if user_can?(:create_invite) %>
+
+

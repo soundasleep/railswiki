@@ -31,7 +31,7 @@ module Railswiki
 
     def lowercase_title_must_equal_title
       if title.downcase != lowercase_title.downcase
-        errors.add(:lowercase_title, "Mismatching lowercase title")
+        errors.add(:lowercase_title, "does not match the lowercase title")
       end
     end
 

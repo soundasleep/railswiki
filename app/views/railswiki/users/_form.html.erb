@@ -21,18 +21,7 @@
     <%= f.text_field :email %>
   </div>
 
-  <div class="field">
-    <%= f.label :role %>
-    <%= f.select :role, Railswiki::User::AVAILABLE_ROLES %>
-  </div>
-
-  <h2>Description of roles:</h2>
-
-  <ul>
-    <li><strong>admin</strong> users can edit and remove users</li>
-    <li><strong>editor</strong> users can edit pages and view page histories</li>
-    <li><strong>other</strong> users can view pages</li>
-  </ul>
+  <%= render("shared/roles", form: f) %>
 
   <div class="actions">
     <%= f.submit %>

@@ -1,8 +1,8 @@
 # Railswiki
-Short description and motivation.
+A wiki engine in Rails 5.
 
 ## Usage
-How to use my plugin.
+TODO How to use my plugin.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -78,22 +78,27 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Assigning permissions to users
 1. Uploading files and images
 1. Existing image widget in wysiwyg editor
+1. Invite users
 
 ## MVP
 
-1. Create new users or invite users
 1. Existing file widget in wysiwyg editor
 1. Allow images to be uploaded from image dialog
+1. Search
+1. A nice default style
+1. Files can be deleted
+1. Pages can be deleted
+1. Histories can be deleted
 
 ## TODO
 
+1. Images can be scaled and linked to external URLs
 1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests
 3. Travis-ci integration
 4. Demo site on Heroku
 5. Screenshot
-6. A nice default style
 7. Include Javascript libraries through an asset pipeline, rather than through http
 8. Put dialog Javascript into assets/, not inline
 

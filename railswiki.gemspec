@@ -28,5 +28,8 @@ Gem::Specification.new do |s|
   # Upload
   s.add_dependency "carrierwave", "~> 1.0"
 
+  # Misc
+  s.add_dependency "email_validator"
+
   s.add_development_dependency "sqlite3"
 end

@@ -6,6 +6,7 @@ Railswiki::Engine.routes.draw do
     get :history
   end
   resources :users, only: [:index, :show, :edit, :update, :destroy]
+  resources :invites, only: [:index, :new, :create, :show, :destroy]
   resources :histories, only: [:show, :index, :destroy]
   resources :uploaded_files do
     collection do

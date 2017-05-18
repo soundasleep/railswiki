@@ -27,6 +27,7 @@ module Railswiki
     # GET /uploaded_files/new
     def new
       @uploaded_file = UploadedFile.new
+      @uploaded_file.user = current_user
     end
 
     # GET /uploaded_files/1/edit

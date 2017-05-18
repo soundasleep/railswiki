@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  accepted_at: 2017-05-18 10:47:00
+  inviting_user: one
+  invited_user: one
+
+two:
+  email: MyString
+  accepted_at: 2017-05-18 10:47:00
+  inviting_user: two
+  invited_user: two

@@ -20,7 +20,7 @@
         <td><%= link_to page.title, wiki_path(page) %></td>
         <td>Edited <%= time_ago page.latest_version.created_at %></td>
         <% if user_can?(:see_page_author) %>
-        <td>by <%= page.author ? link_to(page.author.name, page.author) : "nobody!" %></td>
+        <td>by <%= user_link page.author %></td>
         <% end %>
         <td><%= link_to "json", wiki_path(page, format: :json) %></td>
         <td><%= link_to 'Edit', edit_page_path(page) if user_can?(:edit_page) %></td>

@@ -25,7 +25,7 @@
           <% end %>
         </td>
         <td>Edited <%= time_ago uploaded_file.created_at %></td>
-        <td>by <%= uploaded_file.user ? link_to(uploaded_file.user.name, uploaded_file.user) : "nobody!" %></td>
+        <td>by <%= user_link uploaded_file.user %></td>
         <td><%= link_to 'Edit', edit_uploaded_file_path(uploaded_file) if user_can?(:edit_file) %></td>
         <td><%= link_to 'Destroy', uploaded_file, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_file) %></td>
       </tr>

@@ -4,6 +4,7 @@ PATH
     railswiki (0.1.0)
       activerecord-session_store
       carrierwave (~> 1.0)
+      email_validator
       omniauth-google-oauth2
       rails (~> 5.0.2)
       redcarpet
@@ -56,11 +57,13 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     builder (3.2.3)
-    carrierwave (1.0.0)
+    carrierwave (1.1.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     concurrent-ruby (1.0.5)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)

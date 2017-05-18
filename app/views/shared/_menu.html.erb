@@ -4,6 +4,7 @@
 <%= link_to "Pages", pages_path if user_can?(:list_pages) %>
 <%= link_to "Histories", histories_path if user_can?(:list_histories) %>
 <%= link_to "Users", users_path if user_can?(:list_users) %>
+<%= link_to "Invites", invites_path if user_can?(:list_invites) %>
 <%= link_to "Files", uploaded_files_path if user_can?(:list_files) %>
 <% if current_user %>
   Logged in as

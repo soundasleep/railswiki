@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @invite.email %>
+</p>
+
+<p>
+  <strong>Invited by:</strong>
+  <%= user_link @invite.inviting_user %>
+</p>
+
+<p>
+  <strong>Invited user:</strong>
+  <%= user_link @invite.invited_user %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= time_ago @invite.created_at %>
+</p>
+
+<p>
+  <strong>Accepted at:</strong>
+  <%= time_ago @invite.accepted_at %>
+</p>
+
+<p>
+  <strong>Invite this user to sign up at:</strong>
+  <%= link_to main_app.login_url %>
+</p>
+
+<%= link_to 'Destroy', @invite, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_invite) %>
+<%= link_to 'Back', invites_path %>

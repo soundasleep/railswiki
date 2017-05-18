@@ -28,6 +28,10 @@ module Railswiki
         current_user && ["admin", "editor"].include?(current_user.role)
       when :edit_file, :delete_file, :create_file, :list_files
         current_user && ["admin", "editor"].include?(current_user.role)
+      when :list_invites
+        current_user && ["admin", "editor"].include?(current_user.role)
+      when :delete_invite, :create_invite
+        current_user && ["admin"].include?(current_user.role)
       else
         raise InvalidRoleError, "Unknown role #{role}"
       end
@@ -87,6 +91,18 @@ module Railswiki
 
     def require_file_delete_permission
       require_role :delete_file
+    end
+
+    def require_invites_list_permission
+      require_role :list_invites
+    end
+
+    def require_invite_create_permission
+      require_role :create_invite
+    end
+
+    def require_invite_delete_permission
+      require_role :delete_invite
     end
 
     def require_role(role)

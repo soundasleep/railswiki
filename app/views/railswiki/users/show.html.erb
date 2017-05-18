@@ -17,6 +17,11 @@
 </p>
 
 <p>
+  <strong>Invited by:</strong>
+  <%= @user.invite ? link_to(@user.invite.invited_user.name, @user.invite) : "n/a" %>
+</p>
+
+<p>
   <strong>Image:</strong>
   <%= image_tag @user.image_url %>
 </p>

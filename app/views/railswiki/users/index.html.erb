@@ -30,3 +30,8 @@
 </table>
 
 <br>
+
+<%= link_to "Invited users", invites_path if user_can?(:list_invites) %>
+<%= link_to "Invite new user", new_invite_path if user_can?(:create_invite) %>
+
+

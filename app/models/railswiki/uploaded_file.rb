@@ -24,7 +24,7 @@ module Railswiki
 
     def file_exists
       if file.file.nil?
-        errors.add(:file, "No such file")
+        errors.add(:file, "does not exist")
       end
     end
   end
