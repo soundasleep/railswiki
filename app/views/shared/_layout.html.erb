@@ -1,0 +1,15 @@
+<div class="header">
+  <%= include_wiki "Special:Header" %>
+</div>
+
+<div class="menu">
+  <%= render "shared/menu" %>
+</div>
+
+<div class="content">
+  <%= yield %>
+</div>
+
+<div class="footer">
+  <%= include_wiki "Special:Footer" %>
+</div>

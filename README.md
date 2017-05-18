@@ -87,6 +87,8 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 ## MVP
 
 1. A nice default style
+1. Include Javascript libraries through an asset pipeline, rather than through http
+1. Put dialog Javascript into assets/, not inline
 1. When login fails, redirect to an error page, not 500
 
 ## TODO
@@ -97,13 +99,11 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 3. Travis-ci integration
 4. Demo site on Heroku
 5. Screenshot
-7. Include Javascript libraries through an asset pipeline, rather than through http
-8. Put dialog Javascript into assets/, not inline
 1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
-1. Support [strikethrough, pretty code blocks, etc](https://github.com/vmg/redcarpet)
+1. Support [strikethrough, pretty code blocks, etc](https://github.com/vmg/redcarpet) and list in Special:Formatting
 1. Example Special:Formatting page with full supported syntax
-1. What Links Here
-1. Page Categories
+1. "What Links Here"
+1. "Page Categories"
 
 ## Contributing
 Contribution directions go here.
