@@ -55,10 +55,10 @@ module Railswiki
     def create
       @uploaded_file = UploadedFile.new(uploaded_file_params)
       @uploaded_file.user = current_user
+      @uploaded_file.title = "#{Time.now}"
 
       if @uploaded_file.save
-        # try update the title to the uploaded filename, this might fail if there's an existing file
-        @uploaded_file.update_attributes title: @uploaded_file.file_identifier
+        @uploaded_file.update_attributes! title: @uploaded_file.file_identifier
 
         redirect_to @uploaded_file, notice: 'Uploaded file was successfully created.'
       else
@@ -69,9 +69,10 @@ module Railswiki
     # PATCH/PUT /uploaded_files/1
     def update
       @uploaded_file.user = current_user
+      @uploaded_file.title = "#{Time.now}"
+
       if @uploaded_file.update(uploaded_file_params)
-        # try update the title to the uploaded filename, this might fail if there's an existing file
-        @uploaded_file.update_attributes title: @uploaded_file.file_identifier
+        @uploaded_file.update_attributes! title: @uploaded_file.file_identifier
 
         redirect_to @uploaded_file, notice: 'Uploaded file was successfully updated.'
       else
