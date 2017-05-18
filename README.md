@@ -83,6 +83,7 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 1. Prevent navigating/reloading with unsaved changes
 1. Templates can be included using `{{template}}`
 1. Search with `{{Special:Search}}` template
+1. Rails 5.1
 
 ## MVP
 
@@ -93,7 +94,7 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 ## TODO
 
-1. Upgrade to Rails 5.1, use yarn maybe?
+1. Use yarn/webpack for Javascript assets
 1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests
