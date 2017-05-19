@@ -92,16 +92,19 @@ module Railswiki
           # somehow call preprocess() again, you MUST add a test to prevent
           # infinite inclusion.
           # It also means we don't need to `raw` the output.
-          "<span class=\"wiki-template wiki-#{classify_title($1)}\">" +
-            template.content +
-            "</span>"
+          template.content
         else
           "*** Unknown template #{$1} ***"
         end
       end
 
+      # Wiki links [[link|title]]
+      full_document = full_document.gsub(/\[\[([^\n]+?)\|([^\n]+?)\]\]/i) do |match|
+        "[#{$2}](#{wiki_path($1)})"
+      end
+
       # Wiki links [[link]]
-      full_document = full_document.gsub(/\[\[([^\]]+)\]\]/i) do |match|
+      full_document = full_document.gsub(/\[\[([^\n]+?)\]\]/i) do |match|
         "[#{$1}](#{wiki_path($1)})"
       end
 
