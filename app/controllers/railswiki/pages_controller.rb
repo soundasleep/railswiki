@@ -29,6 +29,8 @@ module Railswiki
 
     # GET /pages/1
     def show
+      require_special_pages_permission if is_special_page?(@page)
+
       respond_to do |format|
         format.html
         format.json { render json: @page.expose_json }
@@ -37,6 +39,8 @@ module Railswiki
 
     # GET /pages/1/history
     def history
+      require_special_pages_permission if is_special_page?(@page)
+
       @histories = @page.histories
       respond_to do |format|
         format.html
@@ -48,6 +52,8 @@ module Railswiki
     def new
       @page = Page.new
       @page.title = params[:title].gsub(/_/, " ") if params[:title]
+
+      require_special_pages_permission if is_special_page?(@page)
 
       # Preload Special: pages with their default content
       special_page = special_pages.select { |page| page.title == @page.title }.first
@@ -63,6 +69,9 @@ module Railswiki
     # POST /pages
     def create
       @page = Page.new(page_params)
+
+      require_special_pages_permission if is_special_page?(@page)
+
       @page.transaction do
         if @page.save
           update_content
@@ -75,6 +84,8 @@ module Railswiki
 
     # PATCH/PUT /pages/1
     def update
+      require_special_pages_permission if is_special_page?(@page)
+
       @page.transaction do
         if @page.update(page_params)
           update_content
@@ -87,6 +98,8 @@ module Railswiki
 
     # DELETE /pages/1
     def destroy
+      require_special_pages_permission if is_special_page?(@page)
+
       @page.destroy
       redirect_to pages_url, notice: 'Page was successfully destroyed.'
     end

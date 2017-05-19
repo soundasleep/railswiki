@@ -1,6 +1,7 @@
+<div class="meta-content">
 <h1>Users</h1>
 
-<table>
+<table class="list-table">
   <thead>
     <tr>
       <th>Image</th>
@@ -31,5 +32,4 @@
 
 <%= link_to "Invited users", invites_path if user_can?(:list_invites) %>
 <%= link_to "Invite new user", new_invite_path if user_can?(:create_invite) %>
-
-
+</div>

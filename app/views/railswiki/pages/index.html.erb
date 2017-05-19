@@ -1,28 +1,33 @@
+<div class="meta-content">
 <h1>Pages</h1>
 
-<table>
+<table class="list-table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Latest version</th>
+      <th class="title">Title</th>
+      <th class="version">Latest version</th>
       <% if user_can?(:see_page_author) %>
-      <th>Author</th>
+      <th class="author">Author</th>
       <% end %>
-      <th colspan="3"></th>
+      <th class="tools" colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @pages.order(title: :asc).limit(100).each do |page| %>
+    <% @pages.order(title: :asc).limit(100).reject { |page| is_special_page?(page) && !user_can?(:special_pages) }.each do |page| %>
       <tr>
-        <td><%= link_to page.title, wiki_path(page) %></td>
-        <td>Edited <%= time_ago page.latest_version.created_at %></td>
+        <td class="title"><%= link_to page.title, wiki_path(page) %></td>
+        <td class="version">Edited <%= time_ago page.latest_version.created_at %></td>
         <% if user_can?(:see_page_author) %>
-        <td>by <%= user_link page.author %></td>
+        <td class="author">by <%= user_link page.author %></td>
         <% end %>
-        <td><%= link_to "json", wiki_path(page, format: :json) %></td>
-        <td><%= link_to 'Edit', edit_page_path(page) if user_can?(:edit_page) %></td>
-        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_page) %></td>
+        <td class="json"><%= link_to "json", wiki_path(page, format: :json) %></td>
+        <% if is_special_page?(page) || user_can?(:special_pages) %>
+          <td><%= link_to 'Edit', edit_page_path(page) if user_can?(:edit_page) %></td>
+          <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_page) %></td>
+        <% else %>
+          <td class="tools" colspan="2"></td>
+        <% end %>
       </tr>
     <% end %>
 
@@ -36,22 +41,22 @@
   </tbody>
 </table>
 
-<% unless @special_pages.empty? %>
+<% unless @special_pages.empty? || !user_can?(:special_pages) %>
   <h2>Special Pages</h2>
 
-  <table>
+  <table class="list-table">
     <thead>
       <tr>
-        <th>Title</th>
-        <th colspan="1"></th>
+        <th class="title">Title</th>
+        <th class="tools" colspan="1"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @special_pages.each do |page| %>
         <tr>
-          <td><%= link_to page.title, wiki_path(page) %></td>
-          <td><%= link_to 'Edit', new_page_path(title: page.title) if user_can?(:create_page) %></td>
+          <td class="title"><%= link_to page.title, wiki_path(page) %></td>
+          <td class="tools"><%= link_to 'Edit', new_page_path(title: page.title) if user_can?(:create_page) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -61,3 +66,5 @@
 <br>
 
 <%= link_to 'New Page', new_page_path if user_can?(:create_page) %>
+
+</div>

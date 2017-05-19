@@ -56,5 +56,9 @@ Copyright {{Special:Year}}
         special_page("Year")
       ]
     end
+
+    def is_special_page?(page)
+      !! special_pages.select { |p| p.title == page.title }.first
+    end
   end
 end

@@ -18,6 +18,8 @@ module Railswiki
       case role
       when :list_pages
         true
+      when :special_pages
+        current_user
       when :edit_page, :delete_page, :create_page, :list_pages, :history_page
         current_user && ["admin", "editor"].include?(current_user.role)
       when :list_users
@@ -41,6 +43,10 @@ module Railswiki
 
     def require_pages_list_permission
       require_role :list_pages
+    end
+
+    def require_special_pages_permission
+      require_role :special_pages
     end
 
     def require_page_edit_permission
