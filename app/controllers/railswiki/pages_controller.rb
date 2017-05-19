@@ -47,7 +47,7 @@ module Railswiki
     # GET /pages/new
     def new
       @page = Page.new
-      @page.title = params[:title] if params[:title]
+      @page.title = params[:title].gsub(/_/, " ") if params[:title]
 
       # Preload Special: pages with their default content
       special_page = special_pages.select { |page| page.title == @page.title }.first

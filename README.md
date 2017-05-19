@@ -95,6 +95,9 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 ## TODO
 
 1. Use yarn/webpack for Javascript assets
+1. Allow images to be linked as Image:N rather than full paths
+1. Allow files, images to be renamed (change title)
+1. Allow site to be hosted from /root with lowercase titles/slugs, rather than /wiki/ (will require config on both engine & app)
 1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests

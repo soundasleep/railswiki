@@ -1,30 +1,32 @@
-<%= content_tag "h1", class: "title wiki-#{classify_title(@page.title)}" do %>
-  <%= @page.title %>
-<% end %>
+<div class="wiki-content">
+  <small class="actions">
+    <% if @page.builtin_page? %>
+      <%= link_to 'Edit', new_page_path(title: @page.title), class: "edit" if user_can?(:create_page) %>
+    <% else %>
+      <%= link_to 'History', page_history_path(@page), class: "history" if user_can?(:history_page) %>
+      <%= link_to 'Edit', edit_page_path(@page), class: "edit" if user_can?(:edit_page) %>
+      <%= link_to ".json", wiki_path(@page, format: :json), class: "json" %>
+    <% end %>
+  </small>
 
-<small class="actions">
-  <% if @page.builtin_page? %>
-    <%= link_to 'Edit', new_page_path(title: @page.title), class: "edit" if user_can?(:create_page) %>
-  <% else %>
-    <%= link_to 'History', page_history_path(@page), class: "history" if user_can?(:history_page) %>
-    <%= link_to 'Edit', edit_page_path(@page), class: "edit" if user_can?(:edit_page) %>
-    <%= link_to ".json", wiki_path(@page, format: :json), class: "json" %>
+  <%= content_tag "h1", class: "title wiki-#{classify_title(@page.title)}" do %>
+    <%= @page.title %>
   <% end %>
-</small>
 
-<%= content_tag "div", class: "wiki-content wiki-#{classify_title(@page.title)}" do %>
-  <%= raw markdown.render @page.content %>
-<% end %>
+  <%= content_tag "div", class: "body wiki-#{classify_title(@page.title)}" do %>
+    <%= raw markdown.render @page.content %>
+  <% end %>
 
-<p class="information">
-  <strong>Edited</strong>
-  <% if @page.latest_version %>
-    <%= time_ago @page.latest_version.created_at %>
-  <% else %>
-    <i>never!</i>
-  <% end %>
-  <% if user_can?(:see_page_author) %>
-    <strong>by</strong>
-    <%= user_link @page.author %>
-  <% end %>
-</p>
+  <p class="information">
+    <strong>Edited</strong>
+    <% if @page.latest_version %>
+      <%= time_ago @page.latest_version.created_at %>
+    <% else %>
+      <i>never!</i>
+    <% end %>
+    <% if user_can?(:see_page_author) %>
+      <strong>by</strong>
+      <%= user_link @page.author %>
+    <% end %>
+  </p>
+</div>
