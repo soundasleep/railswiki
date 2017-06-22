@@ -227,6 +227,32 @@ end
 
 Note that this might be a security vunerability, depending on the configuration of your server.
 
+## Carrierwave can't write temporary files to `/tmp/uploads`
+
+If you are running your web server as a different user to your deploy user, you might need to make
+your temporary folder writable to all:
+
+```ruby
+after 'deploy:cleanup', :allow_tmp_to_be_writable_by_all do
+  on roles(:app) do
+    execute :chmod, "a+rw -R #{release_path}/tmp"
+  end
+end
+```
+
+## Carrierwave can't write uploads to `public/uploads`
+
+If you are running your web server as a different user to your deploy user, you might need to make
+your uploads folder writable to all:
+
+```ruby
+after 'deploy:cleanup', :allow_uploads_to_be_writable_by_all do
+  on roles(:app) do
+    execute :chmod, "a+rw -R #{shared_path}/public/uploads"
+  end
+end
+```
+
 ## Further troubleshooting
 
 Check `/var/log/apache2/error.log` for Passenger startup errors.
