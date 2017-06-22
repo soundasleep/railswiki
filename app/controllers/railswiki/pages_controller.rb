@@ -29,8 +29,6 @@ module Railswiki
 
     # GET /pages/1
     def show
-      require_special_pages_permission if is_special_page?(@page)
-
       respond_to do |format|
         format.html
         format.json { render json: @page.expose_json }
