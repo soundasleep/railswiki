@@ -61,7 +61,7 @@ module Railswiki
     private
 
     def find_invite(user)
-      Invite.where(email: user.email, accepted_at: nil).only.first
+      Invite.where(email: user.email, accepted_at: nil).first
     end
   end
 end
