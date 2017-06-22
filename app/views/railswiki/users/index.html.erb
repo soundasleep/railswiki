@@ -21,7 +21,7 @@
         <td><%= user.role %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) if user_can?(:edit_user) %></td>
-        <td><%= link_to "json", user, format: :json %></td>
+        <td><%= link_to "json", user_path(user, format: :json) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_user) %></td>
       </tr>
     <% end %>

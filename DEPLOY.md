@@ -158,6 +158,13 @@ $ cap production deploy
   ServerName mywiki.com
   ServerAlias www.mywiki.com
   DocumentRoot /var/www/mywiki.com/
+
+  # Login as deploy, `cd` to `/home/deploy/mywiki/current` and use `passenger-config about ruby-command` for this path
+  PassengerRuby /home/deploy/.rbenv/versions/2.2.3/bin/ruby
+
+  # PassengerLogLevel 3         # change to '4' for more logging
+  # PassengerUser root          # if you installed Passenger through apt-get as root
+
   <Directory /var/www/mywiki.com/>
     AllowOverride all
     RailsBaseURI /mywiki
@@ -181,9 +188,11 @@ $ sudo service apache2 reload
 
 18. If everything has gone well, you should now be able to visit your new site!
 
+To redeploy, you can just use `cap production deploy` again.
+
 # Troubleshooting
 
-### `rbenv: passenger: command not found`
+## `rbenv: passenger: command not found`
 
 If Capistrano is failing to run `exec passenger -v`, it may be because you've installed passenger globally,
 and not through rbenv (e.g. if you've [already installed Redmine](http://www.redmine.org/projects/redmine/wiki/HowTo_Install_Redmine_on_Ubuntu_step_by_step)).
@@ -192,6 +201,34 @@ One solution is to give your `deploy` user `sudo` access and [configure `passeng
 
 Another solution is to replace `require 'capistrano/passenger'` to `require 'capistrano/passenger/no_hook'` in your `Capfile`, and then manually restart passenger after deploys.
 
-TODO it may also be possible to just touch `tmp/restart.txt`, a tested method that works.
+Finally, an easier solution is to use the deprecated method of restarting Passenger, by setting in your `config/deploy.rb`:
+
+```ruby
+set :passenger_restart_with_touch, true
+```
+
+This solution avoids running `passenger -v` and instead just touches `tmp/restart.txt`.
 
 For more information see https://github.com/capistrano/passenger/issues/10.
+
+## Passenger cannot write to the log files
+
+If you're running Passenger as a different user, you can make the logs writable by all users through:
+
+```ruby
+after 'deploy:symlink:shared', :allow_logs_to_be_writable_by_all do
+  on roles(:app) do
+    within release_path do
+      execute :chmod, "a+rw -R #{current_path}/log"
+    end
+  end
+end
+```
+
+Note that this might be a security vunerability, depending on the configuration of your server.
+
+## Further troubleshooting
+
+Check `/var/log/apache2/error.log` for Passenger startup errors.
+
+Check `/home/deploy/mywiki/current/log/` for runtime errors.
