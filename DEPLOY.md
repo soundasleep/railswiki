@@ -121,7 +121,7 @@ Query OK, 0 rows affected (0.00 sec)
 production:
   adapter: mysql2
   encoding: utf8
-  collation: utf8_general_ci
+  collation: utf8_unicode_ci
   database: mywiki
   username: mywiki
   password: <password>
