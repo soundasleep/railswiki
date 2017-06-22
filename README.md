@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get "/auth/google_login/callback" => "railswiki/sessions#create"
   get "/auth/google_login" => "railswiki/sessions#create", as: :login
+
+  root to: "railswiki/pages#show", id: "Home"
 end
 ```
 
@@ -72,6 +74,10 @@ They will automatically be picked up.
 
 You can also override individual views from _railswiki_ by creating e.g. `app/views/railswiki/pages/show.html.erb`.
 
+## Deploying
+
+Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano onto Apache/Passenger/MySQL.
+
 ## Supported
 
 1. Making pages, editing pages
@@ -95,7 +101,9 @@ You can also override individual views from _railswiki_ by creating e.g. `app/vi
 
 ## TODO
 
+1. Use Ruby 2.4+
 1. Use yarn/webpack for Javascript assets
+1. Make site accessible to screen readers (like ChromeVox) by default
 1. Allow images to be linked as Image:N rather than full paths
 1. Allow files, images to be renamed (change title)
 1. Allow site to be hosted from /root with lowercase titles/slugs, rather than /wiki/ (will require config on both engine & app)

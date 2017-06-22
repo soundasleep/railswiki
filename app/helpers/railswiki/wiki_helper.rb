@@ -73,6 +73,7 @@ module Railswiki
     def markdown_options
       {
         tables: true,
+        autolink: true,
         no_intra_emphasis: true
       }
     end
