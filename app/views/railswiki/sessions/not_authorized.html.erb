@@ -1,0 +1,12 @@
+<% title ["Not authorized"] %>
+
+<div class="wiki-content error">
+  <p>
+    You must be <%= link_to "logged in", Rails.application.routes.url_helpers.login_path %> to access this section.
+  </p>
+
+  <p>
+    If you are already logged in, you may not have the correct permissions to access this section - you
+    may want to try <%= link_to "logging out", logout_path %> instead.
+  </p>
+</div>

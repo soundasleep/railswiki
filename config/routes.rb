@@ -2,6 +2,9 @@ Railswiki::Engine.routes.draw do
   # get "/auth/google_login/callback" => "sessions#create"
   get "/signout" => "sessions#destroy", as: :logout
 
+  get "/sessions/not_authorized"
+  get "/sessions/no_invite"
+
   resources :pages do
     get :history
   end

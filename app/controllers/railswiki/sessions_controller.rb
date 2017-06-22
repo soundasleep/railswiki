@@ -36,7 +36,7 @@ module Railswiki
 
               notice << "Invite accepted as a #{invite.role || "user"}."
             else
-              raise "You need to be invited in order to login"
+              return redirect_to sessions_no_invite_path
             end
           end
         end
@@ -51,6 +51,14 @@ module Railswiki
           raise "Failed to login: #{user.errors.full_messages.join(", ")}"
         end
       end
+    end
+
+    def not_authorized
+      render status: :unauthorized
+    end
+
+    def no_invite
+      render status: :forbidden
     end
 
     def destroy

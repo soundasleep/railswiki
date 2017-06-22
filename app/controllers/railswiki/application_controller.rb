@@ -114,8 +114,12 @@ module Railswiki
     end
 
     def require_role(role)
-      unless user_can?(role)
-        raise InvalidRoleError, "You must be logged in to access this section"
+      begin
+        unless user_can?(role)
+          raise InvalidRoleError, "You must be logged in to access this section"
+        end
+      rescue InvalidRoleError => e
+        redirect_to sessions_not_authorized_path
       end
     end
   end

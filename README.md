@@ -108,7 +108,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. A nice default style
 1. Include Javascript libraries through an asset pipeline, rather than through http
 1. Put dialog Javascript into assets/, not inline
-1. When login fails, redirect to an error page, not 500
 
 ## TODO
 
