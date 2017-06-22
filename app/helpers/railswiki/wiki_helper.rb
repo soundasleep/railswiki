@@ -45,7 +45,7 @@ module Railswiki
     end
 
     def classify_title(title)
-      title.gsub(/[^a-z0-9-_]+/i, "_")
+      title.gsub(/[^a-z0-9\-_]+/i, "_")
     end
 
     def wiki_path(page, options = {})

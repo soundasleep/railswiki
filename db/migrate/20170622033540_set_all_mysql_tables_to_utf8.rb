@@ -30,10 +30,10 @@ class SetAllMysqlTablesToUtf8 < ActiveRecord::Migration[5.1]
       t.change :title,         :string, limit: MAX_VARCHAR_LENGTH
     end
 
+    # then change the character sets
     adapter_type = connection.adapter_name.downcase.to_sym
     case adapter_type
     when :mysql, :mysql2
-      # then change the character sets
       [
         "railswiki_histories",
         "railswiki_invites",
