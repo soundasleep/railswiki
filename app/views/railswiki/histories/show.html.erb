@@ -1,3 +1,5 @@
+<% title ["#{@history.page.title} (as at #{@history.created_at})"] %>
+
 <h1>
   <%= link_to @history.page.title, wiki_path(@history.page) %>
   <small><%= link_to ".json", history_path(@history, format: :json) %></small>

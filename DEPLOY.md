@@ -1,4 +1,4 @@
-Deploying a RailsWiki parent site
+Deploying a Railswiki parent site
 =================================
 
 You can use whatever combination of technologies you'd like to deploy the final application,

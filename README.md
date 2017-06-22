@@ -2,9 +2,7 @@
 A wiki engine in Rails 5.
 
 ## Usage
-TODO How to use my plugin.
 
-## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -74,6 +72,20 @@ They will automatically be picked up.
 
 You can also override individual views from _railswiki_ by creating e.g. `app/views/railswiki/pages/show.html.erb`.
 
+### Custom page titles
+
+In `app/helpers/railswiki/title_helper.rb`:
+
+```ruby
+module Railswiki::TitleHelper
+  def title(page_title)
+    page_title = ["My Very First Wiki"] if page_title == ["Home"]
+
+    content_for(:title) { page_title.join(" - ") }
+  end
+end
+```
+
 ## Deploying
 
 Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano onto Apache/Passenger/MySQL.
@@ -97,7 +109,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Include Javascript libraries through an asset pipeline, rather than through http
 1. Put dialog Javascript into assets/, not inline
 1. When login fails, redirect to an error page, not 500
-1. Page titles are displayed, rather than just "Railswiki"
 
 ## TODO
 
@@ -121,8 +132,14 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. "What Links Here"
 1. "Page Categories"
 
+## Sites using Railswiki
+
+* http://outerspaces.org.nz
+
 ## Contributing
+
 Contribution directions go here.
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

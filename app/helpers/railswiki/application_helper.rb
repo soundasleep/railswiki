@@ -3,6 +3,7 @@ require_dependency "redcarpet"
 module Railswiki
   module ApplicationHelper
     include WikiHelper
+    include TitleHelper
 
     def time_ago(time)
       description = if time.present?
