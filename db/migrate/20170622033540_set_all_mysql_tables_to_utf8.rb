@@ -1,7 +1,7 @@
 class SetAllMysqlTablesToUtf8 < ActiveRecord::Migration[5.1]
   MAX_VARCHAR_LENGTH = 191
 
-  def change
+  def up
     # we have to reduce the length of varchar(255) to varchar(191)
     # so it fits in 255 bytes with UTF8 for MySQL
     change_table :railswiki_users do |t|
@@ -46,5 +46,9 @@ class SetAllMysqlTablesToUtf8 < ActiveRecord::Migration[5.1]
     else
       puts "Ignoring adapter #{adapter_type}"
     end
+  end
+
+  def down
+    # We don't really care about the reversibility of this migration
   end
 end
