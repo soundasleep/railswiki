@@ -1,5 +1,5 @@
 <%= form_tag(Railswiki::Engine.routes.url_helpers.pages_path, method: :get, class: "search-form") do |f| %>
     <label for="search">Title:</label>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
     <%= submit_tag "Search" %>
 <% end %>

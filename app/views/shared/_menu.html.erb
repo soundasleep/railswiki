@@ -1,4 +1,4 @@
-<p>
+<nav>
 <%= link_to "New page", new_page_path if user_can?(:create_page) %>
 <%= link_to "Pages", pages_path if user_can?(:list_pages) %>
 <%= link_to "Histories", histories_path if user_can?(:list_histories) %>
@@ -12,4 +12,4 @@
 <% else %>
   <%= link_to "Sign in with Google", main_app.login_path %>
 <% end %>
-</p>
+</nav>
