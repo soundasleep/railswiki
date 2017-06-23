@@ -131,6 +131,7 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Example Special:Formatting page with full supported syntax
 1. "What Links Here"
 1. "Page Categories"
+1. Clicking "sign in" at the bottom of the page redirects to the page you were on
 
 ## Sites using Railswiki
 
