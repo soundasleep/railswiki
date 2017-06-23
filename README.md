@@ -46,13 +46,12 @@ Enable `config/secrets.yml` to load secrets from ENV (using `figaro`):
 # instead read values from the environment.
 production:
   secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
-  OAUTH_CLIENT_ID: <%= ENV["OAUTH_CLIENT_ID"] %>
-  OAUTH_CLIENT_SECRET: <%= ENV["OAUTH_CLIENT_SECRET"] %>
 ```
 
 Set your secrets in a `.env` file in root (using `dotenv-rails`):
 
 ```yaml
+SECRET_KEY_BASE: "xyz"
 OAUTH_CLIENT_ID: "xyz"
 OAUTH_CLIENT_SECRET: "xyz"
 ```
@@ -135,7 +134,7 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 
 ## Sites using Railswiki
 
-* http://outerspaces.org.nz
+* http://outerspaces.org.nz ([source](https://github.com/soundasleep/outerspaces))
 
 ## Contributing
 
