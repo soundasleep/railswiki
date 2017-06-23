@@ -19,6 +19,8 @@
     <%= raw markdown.render @page.content %>
   <% end %>
 
+  <div class="end-of-content"></div>
+
   <p class="information">
     <strong>Edited</strong>
     <% if @page.latest_version %>

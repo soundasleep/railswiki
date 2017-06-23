@@ -67,7 +67,7 @@ set :repo_url, "git@example.com:me/my_repo.git"
 set :deploy_to, '/home/deploy/mywiki'
 
 append :linked_files, "config/database.yml", "config/secrets.yml", ".env"
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/uploads", "vendor/bundle", "public/system", "public/uploads"
 ```
 
 5. Configure `config/deploy/production.rb` and set your remote host IP:
@@ -153,7 +153,7 @@ $ cap production deploy
 
 15. However, it's still not available to the web through Apache. Set up a new site for Apache in `/etc/apache2/sites-enabled/mywiki.conf`:
 
-```conf
+```apache
 <VirtualHost *:80>
   ServerName mywiki.com
   ServerAlias www.mywiki.com
@@ -235,7 +235,7 @@ your temporary folder writable to all:
 ```ruby
 after 'deploy:cleanup', :allow_tmp_to_be_writable_by_all do
   on roles(:app) do
-    execute :chmod, "a+rw -R #{release_path}/tmp"
+    execute :chmod, "a+rw #{release_path}/tmp #{release_path}/tmp/uploads"
   end
 end
 ```

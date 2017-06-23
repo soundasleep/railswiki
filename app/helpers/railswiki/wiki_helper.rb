@@ -63,7 +63,7 @@ module Railswiki
     end
 
     def markdown
-      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new(), markdown_options)
+      @markdown ||= Redcarpet::Markdown.new(MarkdownRenderer.new(html_options), markdown_options)
     end
 
     def markdown_without_wrap
@@ -75,6 +75,11 @@ module Railswiki
         tables: true,
         autolink: true,
         no_intra_emphasis: true
+      }
+    end
+
+    def html_options
+      {
       }
     end
   end
@@ -93,7 +98,7 @@ module Railswiki
           # somehow call preprocess() again, you MUST add a test to prevent
           # infinite inclusion.
           # It also means we don't need to `raw` the output.
-          template.content
+          "#{template.content}"
         else
           "*** Unknown template #{$1} ***"
         end
@@ -124,6 +129,14 @@ module Railswiki
       else
         %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
       end
+    end
+
+    def postprocess(full_document)
+      full_document = full_document.gsub(/<p>= ([^ <>]+)<\/p>/i) do |match|
+        "<#{$1}>"
+      end
+
+      full_document
     end
   end
 

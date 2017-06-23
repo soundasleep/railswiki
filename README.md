@@ -114,6 +114,7 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Use Ruby 2.4+
 1. Use yarn/webpack for Javascript assets
 1. Make site accessible to screen readers (like ChromeVox) by default
+1. /wiki/Home actually goes to /
 1. Allow images to have descriptions, which are used for screen readers
 1. Allow images to be linked as Image:N rather than full paths
 1. Allow files, images to be renamed (change title)
