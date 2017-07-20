@@ -1,0 +1,27 @@
+{
+  "name": "railswiki",
+  "version": "0.1.0",
+  "description": "A wiki engine in Rails 5.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soundasleep/railswiki.git"
+  },
+  "author": "Jevon Wright <jevon@jevon.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soundasleep/railswiki/issues"
+  },
+  "homepage": "https://github.com/soundasleep/railswiki#readme",
+  "dependencies": {
+    "simplemde": "^1.11.2",
+    "tingle.js": "^0.11.0"
+  }
+}

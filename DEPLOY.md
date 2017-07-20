@@ -190,6 +190,31 @@ $ sudo service apache2 reload
 
 To redeploy, you can just use `cap production deploy` again.
 
+# TODO Javascript (deploy instructions not finished yet)
+
+1. `rails webpacker:install`
+2. `yarn add railswiki`
+3. `yarn install`
+4. add to `app/javascript/packs/application.js`:
+```
+// javascripts
+import SimpleMDE from 'simplemde'
+import Tingle from 'tingle.js'
+
+window.SimpleMDE = SimpleMDE
+window.tingle = Tingle
+
+// stylesheets
+
+// I have NO idea why the src/ is broken but debug/ works - it looks like src/
+// is missing some extra styles that aren't being included properly. who knows.
+// import "simplemde/src/css/simplemde.css"
+import "simplemde/debug/simplemde.css"
+
+import 'tingle.js/src/tingle.css'
+```
+5. Run `bin/webpack` or `bin/webpack-dev-server` (hot reloading)
+
 # Troubleshooting
 
 ## `rbenv: passenger: command not found`

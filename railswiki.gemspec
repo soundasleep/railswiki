@@ -31,5 +31,7 @@ Gem::Specification.new do |s|
   # Misc
   s.add_dependency "email_validator"
 
+  s.add_dependency "webpacker", "~> 2.0"
+
   s.add_development_dependency "sqlite3"
 end

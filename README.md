@@ -59,6 +59,8 @@ OAUTH_CLIENT_SECRET: "xyz"
 
 Get these values by [logging into your Google Developers Console](http://www.jevon.org/wiki/Google_OAuth2_with_Ruby_on_Rails).
 
+**TODO** Enable webpack/Javascript compliation by following instructions in [DEPLOY.md](DEPLOY.md).
+
 You can now host locally and visit http://localhost:3000/wiki:
 
 ```bash
@@ -112,7 +114,7 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 ## TODO
 
 1. Use Ruby 2.4+
-1. Use yarn/webpack for Javascript assets
+1. Use yarn/webpack for Javascript assets ([not until webpack supports Rails engines](https://github.com/rails/webpacker/issues/348))
 1. Make site accessible to screen readers (like ChromeVox) by default
 1. /wiki/Home actually goes to /
 1. Allow images to have descriptions, which are used for screen readers
