@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 # Declare your gem's dependencies in railswiki.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -14,3 +15,6 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem "activerecord-session_store"
+
+gem "rails-assets-simplemde"
+gem "rails-assets-tingle"

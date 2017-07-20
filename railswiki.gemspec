@@ -31,5 +31,14 @@ Gem::Specification.new do |s|
   # Misc
   s.add_dependency "email_validator"
 
+  # Packages from bower
+  s.add_dependency "rails-assets-simplemde"
+  s.add_dependency "rails-assets-tingle"
+  # which require require() CommonJS functionality
+  # s.add_dependency "sprockets-commonjs"
+  # s.add_dependency "browserify-rails"
+  # s.add_dependency "sprockets-browserify", "0.3.0"
+  s.add_dependency "sprockets-commoner"
+
   s.add_development_dependency "sqlite3"
 end
