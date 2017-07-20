@@ -11,15 +11,18 @@ For example, using Capistrano to deploy a parent `mywiki` site to Apache with Pa
 
 1. Add Capistrano to your parent `Gemfile`, and `bundle`:
 ```ruby
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-passenger'
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-yarn'
 
-# Add this if you're using rbenv
-# gem 'capistrano-rbenv'
+  # Add this if you're using rbenv
+  # gem 'capistrano-rbenv'
 
-# Add this if you're using rvm
-# gem 'capistrano-rvm'
+  # Add this if you're using rvm
+  # gem 'capistrano-rvm'
+end
 ```
 
 2. Once these are added, generate your capistrano configuration:
@@ -33,6 +36,7 @@ $ cap install STAGES=production
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/bundler'
+require 'capistrano/yarn'
 
 # If you are using rbenv add these lines:
 # require 'capistrano/rbenv'
@@ -145,13 +149,26 @@ OAUTH_CLIENT_ID: ...
 OAUTH_CLIENT_SECRET: ...
 ```
 
-14. You should now be able to deploy the site using capistrano.
+14. For Webpacker assets, you'll need to [install NodeJS v6+](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) and [Yarn 0.20+](https://yarnpkg.com/lang/en/docs/install/#linux-tab):
+
+```bash
+# NodeJS
+$ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+$ sudo apt-get install nodejs
+
+# Yarn
+$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+$ sudo apt-get update && sudo apt-get install yarn
+```
+
+15. You should now be able to deploy the site using capistrano.
 
 ```bash
 $ cap production deploy
 ```
 
-15. However, it's still not available to the web through Apache. Set up a new site for Apache in `/etc/apache2/sites-enabled/mywiki.conf`:
+16. However, it's still not available to the web through Apache. Set up a new site for Apache in `/etc/apache2/sites-enabled/mywiki.conf`:
 
 ```apache
 <VirtualHost *:80>
@@ -173,47 +190,22 @@ $ cap production deploy
 </VirtualHost>
 ```
 
-16. Link the deployed `public` folder to `/var/www`, making it clearer what Apache is serving:
+17. Link the deployed `public` folder to `/var/www`, making it clearer what Apache is serving:
 
 ```bash
 $ sudo ln -s /home/deploy/mywiki/current/public /var/www/mywiki
 ```
 
-17. Enable the site and reload Apache.
+18. Enable the site and reload Apache.
 
 ```bash
 $ sudo a2ensite mywiki
 $ sudo service apache2 reload
 ```
 
-18. If everything has gone well, you should now be able to visit your new site!
+19. If everything has gone well, you should now be able to visit your new site!
 
 To redeploy, you can just use `cap production deploy` again.
-
-# TODO Javascript (deploy instructions not finished yet)
-
-1. `rails webpacker:install`
-2. `yarn add railswiki`
-3. `yarn install`
-4. add to `app/javascript/packs/application.js`:
-```
-// javascripts
-import SimpleMDE from 'simplemde'
-import Tingle from 'tingle.js'
-
-window.SimpleMDE = SimpleMDE
-window.tingle = Tingle
-
-// stylesheets
-
-// I have NO idea why the src/ is broken but debug/ works - it looks like src/
-// is missing some extra styles that aren't being included properly. who knows.
-// import "simplemde/src/css/simplemde.css"
-import "simplemde/debug/simplemde.css"
-
-import 'tingle.js/src/tingle.css'
-```
-5. Run `bin/webpack` or `bin/webpack-dev-server` (hot reloading)
 
 # Troubleshooting
 

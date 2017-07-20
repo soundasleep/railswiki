@@ -11,5 +11,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {
       name: "google_login",
       approval_prompt: '',
+      verify_iss: false,      # Fix Google screwing around with ISS spec. See https://github.com/zquestz/omniauth-google-oauth2/issues/292
     }
 end

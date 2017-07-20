@@ -58,7 +58,34 @@ OAUTH_CLIENT_SECRET: "xyz"
 
 Get these values by [logging into your Google Developers Console](http://www.jevon.org/wiki/Google_OAuth2_with_Ruby_on_Rails).
 
-**TODO** Enable webpack/Javascript compliation by following instructions in [DEPLOY.md](DEPLOY.md).
+Install webpacker, adding `railswiki` as a dependency:
+
+```bash
+$ rails webpacker:install
+$ yarn add https://github.com/soundasleep/railswiki
+$ yarn install
+```
+
+Add to your `app/javascript/packs/application.js`:
+
+```js
+// javascripts
+import SimpleMDE from 'simplemde'
+import Tingle from 'tingle.js'
+
+window.SimpleMDE = SimpleMDE
+window.tingle = Tingle
+
+// stylesheets
+
+// I have NO idea why the src/ is broken but debug/ works - it looks like src/
+// is missing some extra styles that aren't being included properly. who knows.
+// import "simplemde/src/css/simplemde.css"
+import "simplemde/debug/simplemde.css"
+import 'tingle.js/src/tingle.css'
+```
+
+Run `bin/webpack` or `bin/webpack-dev-server` (hot reloading) to compile the webpacker pack.
 
 You can now host locally and visit http://localhost:3000/wiki:
 
