@@ -190,6 +190,12 @@ $ sudo service apache2 reload
 
 To redeploy, you can just use `cap production deploy` again.
 
+# TODO Javascript behaviour
+
+x. Add a package.json referencing railswiki
+x. npm install, npm install grunt grunt-cli (for grunt)
+x. extend the grunt
+
 # Troubleshooting
 
 ## `rbenv: passenger: command not found`
