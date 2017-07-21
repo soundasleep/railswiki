@@ -51,15 +51,6 @@ require 'capistrano/yarn'
 # Load variables from .env
 require 'dotenv'
 Dotenv.load
-
-# Copy over railswiki migrations as part of migration
-before 'deploy:migrate', :copy_engine_migrations do
-  on roles(:app) do
-    within current_path do
-      execute :rake, 'railties:install:migrations'
-    end
-  end
-end
 ```
 
 4. We can configure `config/deploy.rb` to setup our app:
@@ -205,7 +196,7 @@ $ sudo service apache2 reload
 
 19. If everything has gone well, you should now be able to visit your new site!
 
-To redeploy, you can just use `cap production deploy` again.
+To redeploy, you can just use `cap production deploy` again. To pick up new migrations, remember you'll need to `rake railties:install:migrations` locally.
 
 # Troubleshooting
 
