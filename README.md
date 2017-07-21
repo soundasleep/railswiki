@@ -114,6 +114,22 @@ module Railswiki::TitleHelper
 end
 ```
 
+### Use slugs rather than /wiki
+
+Create a new initialiser to enable slugs, rather than wiki pages:
+
+```ruby
+# config/initializers/railswiki_slugs.rb
+
+Railswiki::Engine.use_slugs = true
+```
+
+And add to your `routes.rb`, before your `root` route:
+
+```ruby
+get "*path", to: 'railswiki/pages#show', via: :get, as: :slug
+```
+
 ## Deploying
 
 Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano onto Apache/Passenger/MySQL.
@@ -142,7 +158,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Use Ruby 2.4+
 1. Use yarn/webpack for Javascript assets ([not until webpack supports Rails engines](https://github.com/rails/webpacker/issues/348))
 1. Make site accessible to screen readers (like ChromeVox) by default
-1. /wiki/Home actually goes to /
 1. Allow images to have descriptions, which are used for screen readers
 1. Allow images to be linked as Image:N rather than full paths
 1. Allow files, images to be renamed (change title)

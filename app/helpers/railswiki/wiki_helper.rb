@@ -29,7 +29,7 @@ module Railswiki
 
         hash[ref] = Page.where(id: ref).
           or(Page.where(title: [ref, unprettify_title(ref)]).
-          or(Page.where(lowercase_title: [ref.downcase, unprettify_title(ref.downcase)]))).
+          or(Page.where(lowercase_title: [ref.downcase, unprettify_title(ref.downcase), unprettify_slug(ref.downcase)]))).
           first
         hash[ref] ||= special_pages.select { |page| page.title == ref }.first
       end
@@ -40,8 +40,16 @@ module Railswiki
       title.gsub(/ /, "_")
     end
 
+    def prettify_slug(title)
+      title.downcase.gsub(/ /, "-")
+    end
+
     def unprettify_title(title)
       title.present? ? title.gsub(/_/, " ") : nil
+    end
+
+    def unprettify_slug(title)
+      title.present? ? title.gsub(/-/, " ") : nil
     end
 
     def classify_title(title)
@@ -52,14 +60,22 @@ module Railswiki
       page = "." if page == ""
 
       if page.respond_to?(:title)
-        url_helpers.title_path(prettify_title(page.title), options)
+        title_or_slug_path(page.title, options)
       else
-        url_helpers.title_path(prettify_title(page), options)
+        title_or_slug_path(page, options)
       end
     end
 
-    def url_helpers
-      Railswiki::Engine.routes.url_helpers
+    def title_or_slug_path(title, options)
+      if title == "Home" || title == "home"
+        return Rails.application.routes.url_helpers.root_path(options)
+      end
+
+      if Railswiki::Engine.use_slugs
+        Rails.application.routes.url_helpers.slug_path(prettify_slug(title), options)
+      else
+        Railswiki::Engine.routes.url_helpers.title_path(prettify_title(title), options)
+      end
     end
 
     def markdown
