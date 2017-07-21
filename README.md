@@ -130,17 +130,16 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Templates can be included using `{{template}}`
 1. Search with `{{Special:Search}}` template
 1. Rails 5.1
+1. Uses yarn/webpack for Javascript assets (though it's a bit messy - [waiting for webpack support for Rails Engines](https://github.com/rails/webpacker/issues/348))
 
 ## MVP
 
 1. A nice default style
-1. Include Javascript libraries through an asset pipeline, rather than through http
 1. Put dialog Javascript into assets/, not inline
 
 ## TODO
 
 1. Use Ruby 2.4+
-1. Use yarn/webpack for Javascript assets ([not until webpack supports Rails engines](https://github.com/rails/webpacker/issues/348))
 1. Make site accessible to screen readers (like ChromeVox) by default
 1. /wiki/Home actually goes to /
 1. Allow images to have descriptions, which are used for screen readers
