@@ -35,7 +35,7 @@ module Railswiki
 
     def self.search(query)
       if query
-        where("title LIKE :query", query: "%#{query}%")
+        where("title LIKE :query COLLATE utf8_general_ci", query: "%#{query}%")
       else
         all
       end
