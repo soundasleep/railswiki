@@ -114,7 +114,7 @@ module Railswiki::TitleHelper
 end
 ```
 
-### Use slugs rather than /wiki
+### Use slugs (/title) rather than Wiki (/wiki/Title)
 
 Create a new initialiser to enable slugs, rather than wiki pages:
 
@@ -160,7 +160,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Allow images to have descriptions, which are used for screen readers
 1. Allow images to be linked as Image:N rather than full paths
 1. Allow files, images to be renamed (change title)
-1. Allow site to be hosted from /root with lowercase titles/slugs, rather than /wiki/ (will require config on both engine & app)
 1. How to set favicons, meta information etc
 1. All the schemas require null set
 1. Rspec tests
