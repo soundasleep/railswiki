@@ -129,17 +129,17 @@ module Railswiki
       end
 
       # Wiki links [[link|title|extra html]]
-      full_document = full_document.gsub(/\[\[([^\n\]]+?)\|([^\n\]]+?)\|([^\n\]]+?)\]\]/i) do |match|
+      full_document = full_document.gsub(/\[\[([^\n]+?)\|([^\n]+?)\|([^\n]+?)\]\]/i) do |match|
         "<a href=\"#{wiki_path($1)}\" #{$3}>#{$2}</a>"
       end
 
       # Wiki links [[link|title]]
-      full_document = full_document.gsub(/\[\[([^\n\]]+?)\|([^\n\]]+?)\]\]/i) do |match|
+      full_document = full_document.gsub(/\[\[([^\n]+?)\|([^\n]+?)\]\]/i) do |match|
         "[#{$2}](#{wiki_path($1)})"
       end
 
       # Wiki links [[link]]
-      full_document = full_document.gsub(/\[\[([^\n\]]+?)\]\]/i) do |match|
+      full_document = full_document.gsub(/\[\[([^\n]+?)\]\]/i) do |match|
         "[#{$1}](#{wiki_path($1)})"
       end
 
