@@ -112,6 +112,7 @@ module Railswiki
       @page = select_page(title)
 
       unless @page
+        byebug
         if user_can?(:create_page)
           return redirect_to new_page_path(title: title)
         else

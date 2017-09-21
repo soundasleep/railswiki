@@ -1,0 +1,29 @@
+This is a list of the advanced formatting provided by [railswiki](https://github.com/soundasleep/railswiki). For basic Markdown reference, check out [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
+Generally, for any advanced formatting you should do it in the source/SCSS of your application; otherwise you risk providing a really poor experience to mobile users.
+
+## Templates
+
+```{{template_name}}```
+
+Will insert the template [[template_name]].
+
+## Wiki links
+
+```[[link]]``` becomes ```<a href="/link">link</a>```
+
+```[[link|title]]``` becomes  ```<a href="/link">title</a>```
+
+```[[link|title|title="home"]]``` becomes ```<a href="/link" title="Home">title</a>```
+
+## Images
+
+```![alt](url.png =100px)``` becomes ```<img src="url.png" alt="alt" max-width="100px">```
+
+You can also use `=50x100`, or `=50%`, or `=50%x25%`.
+
+## Arbitrary HTML
+
+```= section``` becomes ```<section>```
+
+```= /section``` becomes ```</section>```

@@ -31,7 +31,7 @@ module Railswiki
           or(Page.where(title: [ref, unprettify_title(ref)]).
           or(Page.where(lowercase_title: [ref.downcase, unprettify_title(ref.downcase), unprettify_slug(ref.downcase)]))).
           first
-        hash[ref] ||= special_pages.select { |page| page.title == ref }.first
+        hash[ref] ||= special_pages.select { |page| page.title.downcase == ref.downcase }.first
       end
       @select_pages[page_or_title]
     end
@@ -104,6 +104,14 @@ module Railswiki
     include WikiHelper
 
     def preprocess(full_document)
+      code_blocks = []
+
+      # Strip out code blocks
+      full_document = full_document.gsub(/(```[^`]+?```)/im) do |match|
+        code_blocks << match
+        "__code_marker:#{code_blocks.length - 1}__"
+      end
+
       # Include templates {{template}}
       full_document = full_document.gsub(/\{\{([^\}]+)\}\}/i) do |match|
         template = select_page($1)
@@ -133,6 +141,11 @@ module Railswiki
       # Wiki links [[link]]
       full_document = full_document.gsub(/\[\[([^\n]+?)\]\]/i) do |match|
         "[#{$1}](#{wiki_path($1)})"
+      end
+
+      # Re-insert code blocks
+      full_document = full_document.gsub(/__code_marker:(\d+)__/) do |match|
+        code_blocks[$1.to_i]
       end
 
       full_document

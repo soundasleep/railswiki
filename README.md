@@ -160,7 +160,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 1. Allow images to have descriptions, which are used for screen readers
 1. Allow images to be linked as Image:N rather than full paths
 1. Allow files, images to be renamed (change title)
-1. How to set favicons, meta information etc
 1. All the schemas require null set
 1. Rspec tests
 2. Cucumber tests
@@ -169,7 +168,6 @@ Check out [DEPLOY.md](DEPLOY.md) for instructions to deploy using Capistrano ont
 5. Screenshot
 1. Uploads [persist across validations](https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays) and can be [uploaded from remote URLs](https://github.com/carrierwaveuploader/carrierwave#uploading-files-from-a-remote-location)
 1. Support [strikethrough, pretty code blocks, etc](https://github.com/vmg/redcarpet) and list in Special:Formatting
-1. Example Special:Formatting page with full supported syntax
 1. "What Links Here"
 1. "Page Categories"
 1. Clicking "sign in" at the bottom of the page redirects to the page you were on
