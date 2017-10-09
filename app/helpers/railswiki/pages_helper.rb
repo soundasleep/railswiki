@@ -68,6 +68,8 @@ module Railswiki
     end
 
     def is_special_page_title?(title)
+      return false if title.nil?
+
       !! special_pages.select { |p| p.title.downcase == title.downcase }.first
     end
   end
