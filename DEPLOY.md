@@ -200,7 +200,7 @@ To redeploy, you can just use `cap production deploy` again. To pick up new migr
 
 # Troubleshooting
 
-## `rbenv: passenger: command not found`
+### `rbenv: passenger: command not found`
 
 If Capistrano is failing to run `exec passenger -v`, it may be because you've installed passenger globally,
 and not through rbenv (e.g. if you've [already installed Redmine](http://www.redmine.org/projects/redmine/wiki/HowTo_Install_Redmine_on_Ubuntu_step_by_step)).
@@ -219,7 +219,7 @@ This solution avoids running `passenger -v` and instead just touches `tmp/restar
 
 For more information see https://github.com/capistrano/passenger/issues/10.
 
-## Passenger cannot write to the log files
+### Passenger cannot write to the log files
 
 If you're running Passenger as a different user, you can make the logs writable by all users through:
 
@@ -235,7 +235,7 @@ end
 
 Note that this might be a security vunerability, depending on the configuration of your server.
 
-## Carrierwave can't write temporary files to `/tmp/uploads`
+### Carrierwave can't write temporary files to `/tmp/uploads`
 
 If you are running your web server as a different user to your deploy user, you might need to make
 your temporary folder writable to all:
@@ -248,7 +248,7 @@ after 'deploy:cleanup', :allow_tmp_to_be_writable_by_all do
 end
 ```
 
-## Carrierwave can't write uploads to `public/uploads`
+### Carrierwave can't write uploads to `public/uploads`
 
 If you are running your web server as a different user to your deploy user, you might need to make
 your uploads folder writable to all:
@@ -260,6 +260,14 @@ after 'deploy:cleanup', :allow_uploads_to_be_writable_by_all do
   end
 end
 ```
+
+### During `cap deploy`, `/usr/bin/env git ls-remote` returns `Permission denied (publickey)`
+
+This can happen if you are trying to deploy a private repository (e.g. GitHub) with public key (SSH),
+and the remote repository does not recognise the `deploy` user as a valid user.
+
+Check that the `deploy` users' `~/.ssh/id_rsa.pub` isn't secured with a passphrase.
+(The security implications of not having a passphrase is not known.)
 
 ## Further troubleshooting
 
