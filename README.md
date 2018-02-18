@@ -1,4 +1,5 @@
-# Railswiki
+# Railswiki [![Gem Version](https://badge.fury.io/rb/railswiki.svg)](https://badge.fury.io/rb/railswiki)
+
 A wiki engine in Rails 5.
 
 ## Usage
