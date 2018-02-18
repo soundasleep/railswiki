@@ -19,19 +19,19 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 5.1"
 
   # Login
-  s.add_dependency "omniauth-google-oauth2", "~> 0"
-  s.add_dependency "activerecord-session_store", "~> 0"
+  s.add_dependency "omniauth-google-oauth2", "~> 0.5"
+  s.add_dependency "activerecord-session_store", "~> 1.1"
 
   # Rendering
-  s.add_dependency "redcarpet", "~> 0"
+  s.add_dependency "redcarpet", "~> 3.4"
 
   # Upload
   s.add_dependency "carrierwave", "~> 1.0"
 
   # Misc
-  s.add_dependency "email_validator", "~> 0"
+  s.add_dependency "email_validator", "~> 1.6"
 
   s.add_dependency "webpacker", "~> 2.0"
 
-  s.add_development_dependency "sqlite3", "~> 0"
+  s.add_development_dependency "sqlite3", "~> 1.3"
 end
