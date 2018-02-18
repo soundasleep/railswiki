@@ -3,7 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
-  <%= link_to "json", user_path(@user, format: :json) %>
+  <%= link_to "json", user_path(@user, format: :json), data: { turbolinks: false } %>
 </p>
 
 <p>

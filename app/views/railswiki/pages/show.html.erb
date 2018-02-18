@@ -7,7 +7,7 @@
     <% else %>
       <%= link_to 'History', page_history_path(@page), class: "history" if user_can?(:history_page) %>
       <%= link_to 'Edit', edit_page_path(@page), class: "edit" if user_can?(:edit_page) %>
-      <%= link_to ".json", wiki_path(@page, format: :json), class: "json" %>
+      <%= link_to ".json", wiki_path(@page, format: :json), class: "json", data: { turbolinks: false } %>
     <% end %>
   </small>
 

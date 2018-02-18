@@ -23,7 +23,7 @@
         <% if user_can?(:see_page_author) %>
         <td class="author">by <%= user_link page.author %></td>
         <% end %>
-        <td class="json"><%= link_to "json", wiki_path(page, format: :json) %></td>
+        <td class="json"><%= link_to "json", wiki_path(page, format: :json), data: { turbolinks: false } %></td>
         <% if is_special_page?(page) || user_can?(:special_pages) %>
           <td><%= link_to 'Edit', edit_page_path(page) if user_can?(:edit_page) %></td>
           <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_page) %></td>

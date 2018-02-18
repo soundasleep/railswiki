@@ -23,7 +23,7 @@
         <% if user_can?(:see_page_author) %>
         <td><%= user_link history.author %></td>
         <% end %>
-        <td><%= link_to "json", history_path(history, format: :json) %></td>
+        <td><%= link_to "json", history_path(history, format: :json, data: { turbolinks: false }) %></td>
         <td><%= link_to 'Destroy', history, method: :delete, data: { confirm: 'Are you sure?' } if user_can?(:delete_history) %></td>
       </tr>
     <% end %>

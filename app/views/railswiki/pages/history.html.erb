@@ -3,7 +3,7 @@
 <h1>
   History of
   <%= link_to @page.title, wiki_path(@page) %>
-  <small><%= link_to ".json", page_history_path(@page, format: :json) %></small>
+  <small><%= link_to ".json", page_history_path(@page, format: :json), data: { turbolinks: false } %></small>
 </h1>
 
 <%= render "shared/histories", histories: @page.histories %>
