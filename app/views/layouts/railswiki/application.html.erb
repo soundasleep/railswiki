@@ -17,7 +17,7 @@
 
   <%= render partial: "shared/meta" %>
 </head>
-<body>
+<body id="<%= prettify_slug(@page.title) if @page.present? %>">
 
 <%= render partial: "shared/layout" %>
 
