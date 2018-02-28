@@ -3,7 +3,7 @@ require "email_validator"
 module Railswiki
   class Invite < ApplicationRecord
     belongs_to :inviting_user, class_name: "User"
-    belongs_to :invited_user, class_name: "User"
+    belongs_to :invited_user, class_name: "User", optional: true
 
     validates :email, presence: true, uniqueness: true, email: true
     validates :inviting_user, presence: true
