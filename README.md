@@ -65,6 +65,7 @@ Install webpacker, adding `railswiki` as a dependency:
 $ rails webpacker:install
 $ yarn add https://github.com/soundasleep/railswiki
 $ yarn install
+$ yarn add webpack-cli -D
 ```
 
 Add to your `app/javascript/packs/application.js`:
@@ -86,7 +87,7 @@ import "simplemde/debug/simplemde.css"
 import 'tingle.js/src/tingle.css'
 ```
 
-Run `bin/webpack` or `bin/webpack-dev-server` (hot reloading) to compile the webpacker pack.
+Run `bin/webpack-dev-server` (or `ruby bin\webpack-dev-server` [on Windows](https://github.com/rails/webpacker/pull/584)) to compile the webpacker pack with hot reloading.
 
 You can now host locally and visit http://localhost:3000/wiki:
 
