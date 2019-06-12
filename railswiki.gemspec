@@ -16,11 +16,11 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.1"
+  s.add_dependency "rails", "~> 5.2"
 
   # Login
   s.add_dependency "omniauth-google-oauth2", "~> 0.5"
-  s.add_dependency "activerecord-session_store", "~> 1.1"
+  s.add_dependency "activerecord-session_store"
 
   # Rendering
   s.add_dependency "redcarpet", "~> 3.4"
@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.add_dependency "webpacker", "~> 2.0"
 
   s.add_development_dependency "sqlite3", "~> 1.3"
+  s.add_development_dependency "bundler-audit"
 end
