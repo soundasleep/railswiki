@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "redcarpet", "~> 3.4"
 
   # Upload
-  s.add_dependency "carrierwave", "~> 1.0"
+  s.add_dependency "carrierwave", ">= 1", "< 3"
 
   # Misc
   s.add_dependency "email_validator", "~> 1.6"
